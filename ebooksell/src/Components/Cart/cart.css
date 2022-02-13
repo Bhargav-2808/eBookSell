@@ -1,0 +1,14 @@
+.cart-image{
+    height: 80px;
+    width: 80px;
+    margin-top: 10px;
+    left: 10px;
+}
+
+._additem{
+    background-color: #f14d54;
+    padding: 0 4px;
+    color: white;
+    cursor: pointer;
+    margin: 0 5px;
+}

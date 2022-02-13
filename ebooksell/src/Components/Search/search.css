@@ -1,0 +1,15 @@
+._search{
+    height: 40px;
+    font-size: 16px;
+    max-width: 129px;
+    background-color: #80bf32;
+    color: white;
+    padding: 0 15px;
+    margin: 0 20px;
+}
+
+input{
+    height: 40px;
+    width: 422px;
+    color: rgb(33,33,33);
+}

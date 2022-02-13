@@ -1,0 +1,24 @@
+._addCart{
+    color: white;
+    background-color: #f14d54;
+    padding: 3px 5px;
+    font-size: 13px;
+    margin-left: 10px;
+}
+
+._input{
+    width: 13rem;
+    height: 30px ;
+}
+
+._delete{
+    color: white;
+    background-color: #80bf32;
+    padding: 3px 5px;
+    font-size: 13px;
+    margin-left: 10px;
+}
+._icon{
+    cursor: pointer;
+    margin: 0 5px;
+}

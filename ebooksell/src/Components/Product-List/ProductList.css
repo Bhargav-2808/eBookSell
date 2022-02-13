@@ -1,0 +1,16 @@
+._padination{
+    position: fixed;
+    bottom: 4rem;
+}
+
+._addtocartbtn{
+    background-color:#f14d54 ;
+    color:white;
+    height:40px ;
+    padding:0 15px; 
+    border-radius: 8px;
+}
+
+p{
+    text-align: justify;
+}

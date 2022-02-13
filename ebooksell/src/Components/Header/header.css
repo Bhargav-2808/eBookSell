@@ -1,0 +1,13 @@
+img{
+    height:2rem;
+}
+
+._navbar{
+    height: 60px;
+}
+
+.navbar-nav .nav-link{
+    font:14px;
+    color: red !important;
+    
+}
