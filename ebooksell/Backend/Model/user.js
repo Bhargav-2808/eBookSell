@@ -1,6 +1,6 @@
-import mangoose from 'mangoose';
+import mongoose from 'mongoose';
 
-const userSchema = new mangoose.Schema(
+const userSchema =  new mongoose.Schema(
     {
         _id:mongoose.Schema.Types.ObjectId,
         name:{
@@ -16,5 +16,5 @@ const userSchema = new mangoose.Schema(
     }
 )
 
-const postUser = mangoose.model("user",userSchema);
+const postUser = mongoose.model("user",userSchema);
 export default postUser;
