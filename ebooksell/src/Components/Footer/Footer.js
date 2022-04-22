@@ -7,7 +7,7 @@ function Footer() {
   return (
     <>
    
-        <Container fluid  className="_footer" style={{backgroundColor: "#d9d9d9",bottom:"0",position:"fixed",}}>
+        <Container fluid  className="_footer" >
           <Row>
             <Col className="d-flex justify-content-center mt-2">
               <img src={logo} alt="logo" />
