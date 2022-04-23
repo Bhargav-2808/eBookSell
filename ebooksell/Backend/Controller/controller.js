@@ -5,14 +5,16 @@ import assert from "assert";
 import bcrypt from 'bcrypt'
 
 const registerUser = async (req, res) => {
-  const fname = req.body.firstName;
-  const lname = req.body.lastName;
+  const fname = req.body.fname;
+  const lname = req.body.lname;
   const uname = fname + " " + lname;
 
   const uemail = req.body.email;
 
   const pass = req.body.password;
   const cpass = req.body.cpassword;
+
+  console.log(req.body);
 
   try {
     const userExist = await User.findOne({ email: uemail });

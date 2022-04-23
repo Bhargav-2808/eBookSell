@@ -1,18 +1,24 @@
 import React from "react";
 import logo from "../../Images/site-logo.svg";
 import cart from "../../Images/cart.svg";
-import {Nav,Container,Navbar} from 'react-bootstrap'
+import { Nav, Container, Navbar } from "react-bootstrap";
 import "./header.css";
+import { Link } from "react-router-dom";
 
 function Header() {
   return (
     <>
-      <Navbar className="_navbar" >
+      <Navbar className="_navbar">
         <Container>
           <img src={logo} alt="logo" />
           <Nav className="ms-auto">
-            <Nav.Link href="#home" className="_navlink">Login</Nav.Link>
-            <Nav.Link href="#features" className="_navlink">Register</Nav.Link>
+            <Link to="/login" className="_navlink">
+              Login
+            </Link>
+            <p className="_dash">|</p>
+            <Link to="/register" className="_navlink">
+              Register
+            </Link>
           </Nav>
           <img src={cart} className="ms-3" alt="logo" />
         </Container>

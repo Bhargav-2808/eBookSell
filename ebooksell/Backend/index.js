@@ -5,7 +5,7 @@ import bodyParser from 'body-parser';
 import route from './Server/route.js';
 
 const app = express();
-const PORT=6666;
+const PORT=6500;
 const URL = 'mongodb+srv://ebook123:ebook123@ebookcell.snhrl.mongodb.net/ebookcell?retryWrites=true&w=majority'
 
 app.use(cors());

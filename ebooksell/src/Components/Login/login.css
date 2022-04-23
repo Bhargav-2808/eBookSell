@@ -1,0 +1,10 @@
+._loginbutton{
+    background-color: #f14d54;
+    color: white;
+    height: 40px;
+    padding: 0 15px;
+}
+._loginbutton a{
+    color: white ;
+    text-decoration: none;
+}

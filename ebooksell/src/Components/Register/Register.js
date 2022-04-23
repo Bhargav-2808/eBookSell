@@ -1,7 +1,24 @@
 import React from "react";
 import { Col, Container, Row, Form } from "react-bootstrap";
+import { useForm } from "react-hook-form";
+import { Link } from "react-router-dom";
+import { registerUser } from "../../api";
 import "./register.css";
 function Register() {
+  const {
+    register,
+    handleSubmit,
+
+    formState: { errors },
+  } = useForm();
+
+  const onSubmit = async (data) => {
+    console.log(data);
+    let response = await registerUser(data);
+    if (response) {
+      // navigate("/login");
+    }
+  };
   return (
     <>
       <Container className="mt-2">
@@ -11,48 +28,64 @@ function Register() {
           </Col>
         </Row>
         <Row className="mt-4">
-          <Form className="">
+          <Form className="" onSubmit={handleSubmit(onSubmit)}>
             <Form.Group className="mb-3">
               <Row>
                 <Col>
                   <Form.Label>First Name *</Form.Label>
-                  <Form.Control type="email" />
+                  <Form.Control
+                    type="text"
+                    name="fname"
+                    {...register("fname", { required: true, min: 3, max: 20 })}
+                  />
                 </Col>
                 <Col>
                   <Form.Label>Last Name *</Form.Label>
-                  <Form.Control type="email" />
+                  <Form.Control
+                    type="text"
+                    name="lname"
+                    {...register("lname", { required: true, min: 3, max: 20 })}
+                  />
                 </Col>
               </Row>
 
               <Form.Label>Email address *</Form.Label>
-              <Form.Control type="email" />
+              <Form.Control
+                type="email"
+                name="email"
+                {...register("email", {
+                  required: true,
+                  pattern: /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/,
+                })}
+              />
               <Row>
                 <Col>
                   <Form.Label>Password *</Form.Label>
-                  <Form.Control type="password" />
+                  <Form.Control
+                    type="password"
+                    name="password"
+                    {...register("password", { required: true, min: 8 })}
+                  />
                 </Col>
 
                 <Col>
                   <Form.Label>Confirm Password *</Form.Label>
-                  <Form.Control type="password" />
+                  <Form.Control
+                    type="password"
+                    name="cpassword"
+                    {...register("cpassword", { required: true, min: 8 })}
+                  />
+                </Col>
+              </Row>
+              <Row className="mt-3">
+                <Col className="d-flex justify-content-start">
+                  <button className="_loginbutton" type="submit">
+                      Register
+                  </button>
                 </Col>
               </Row>
             </Form.Group>
           </Form>
-        </Row>
-        <Row className="mt-3">
-          <Col className="d-flex justify-content-start">
-            <button
-              style={{
-                backgroundColor: "#f14d54",
-                color: "white ",
-                height: "40px",
-                padding: "0 15px",
-              }}
-            >
-              Register
-            </button>
-          </Col>
         </Row>
       </Container>
     </>

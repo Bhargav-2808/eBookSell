@@ -6,8 +6,18 @@ img{
     height: 60px;
 }
 
-.navbar-nav .nav-link{
-    font:14px;
-    color: red !important;
+.navbar-nav  ._navlink{
+    font-size: 14px;
+    color: red ;
+    text-decoration: none;
+    margin-top: 10px;
     
+    
+}
+
+._dash{
+    color: red ;
+    margin-left: 5px;
+    margin-right: 5px;
+    margin-top: 10px;  
 }

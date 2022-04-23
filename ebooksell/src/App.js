@@ -1,3 +1,4 @@
+import { Route, Routes } from "react-router-dom";
 import "./App.css";
 import Cart from "./Components/Cart/Cart";
 import EditProduct from "./Components/Edit-Product-FInal/EditProduct";
@@ -19,7 +20,16 @@ function App() {
       {/* <ProductPage/> */}
       {/* <EditProduct/> */}
       {/* <ProductList /> */}
-      <Cart/>
+      {/* <Cart/> */}
+      <Routes>
+          <Route exact path='/' element={<ProductPage/>}/>
+          <Route exact path="/login" element={<Login />}/>
+          <Route exact path="/register" element={<Register />}/>
+          <Route exact path="/editproduct" element={<EditProduct />}/>
+          <Route exact path="/productlist" element={<ProductList />}/>
+
+
+        </Routes> 
       <Footer />
     </>
   );
