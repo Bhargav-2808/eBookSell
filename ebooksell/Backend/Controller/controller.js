@@ -7,14 +7,15 @@ import bcrypt from 'bcrypt'
 const registerUser = async (req, res) => {
   const fname = req.body.fname;
   const lname = req.body.lname;
-  const uname = fname + " " + lname;
+ 
 
   const uemail = req.body.email;
 
   const pass = req.body.password;
   const cpass = req.body.cpassword;
-
-  console.log(req.body);
+  const role="buyer";
+;  //  console.log(req.body.fname);
+  //  console.log(req.body.lname);
 
   try {
     const userExist = await User.findOne({ email: uemail });
@@ -46,7 +47,9 @@ const registerUser = async (req, res) => {
 
         const newUser = await new User({
           _id: new mongoose.Types.ObjectId(),
-          name: uname,
+          firstname: fname,
+          lastname: lname,
+          role:role,
           email: uemail,
           password: encrypted,
         });
@@ -112,4 +115,45 @@ const loginUser = async (req, res) => {
   }
 };
 
-export { registerUser, loginUser };
+const displayUser = async (req,res) =>{
+    const user = await User.find();
+    // console.log(user);
+    try {
+      res.status(200).json(user);
+    } catch (error) {
+      res.status(409).json({message:error.message});
+      
+    }
+}
+
+const displayUserById = async (req,res) =>{
+  const user = await User.findById(req.params.id);
+   console.log(user);
+  try {
+    res.status(200).json(user);
+  } catch (error) {
+    res.status(409).json({message:error.message});
+    
+  }
+}
+
+const editUser = async  (req,res)=>{
+
+
+User.updateOne({_id:req.params.id},req.body).then(result => {
+  res.status(200).json({ message: "Update successful!" });
+}).catch( (error)=>{
+  res.send(error.message);
+  console.log(error);
+})
+
+}
+const deleteUser = async (request, response) => {
+  try{
+      await User.deleteOne({_id: request.params.id});
+      response.status(201).json("User deleted Successfully");
+  } catch (error){
+      response.status(409).json({ message: error.message}); 
+  }
+}
+export { registerUser, loginUser ,displayUser,displayUserById,editUser,deleteUser};

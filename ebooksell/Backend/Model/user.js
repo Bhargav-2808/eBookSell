@@ -3,8 +3,14 @@ import mongoose from 'mongoose';
 const userSchema =  new mongoose.Schema(
     {
         _id:mongoose.Schema.Types.ObjectId,
-        name:{
+        firstname:{
             type:String,
+        },
+        lastname:{
+            type:String,
+        },
+        role:{
+            type:String
         },
         email:{
             type:String,

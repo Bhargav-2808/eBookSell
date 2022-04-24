@@ -9,4 +9,18 @@ const loginUser = async(user)=>{
     return axios.post(`${URL}/loginUser`,user)
 }
 
-export {registerUser, loginUser};
+const displayUser = async()=>{
+    return axios.get(`${URL}`)
+}
+const displayUserById = async(id)=>{
+    return axios.get(`${URL}/${id}`);
+}
+
+const editUser = async(user,id)=>{
+    return axios.put(`${URL}/${id}`,user);
+}
+
+const deleteUser = async (id) => {
+    return await axios.delete(`${URL}/${id}`);
+}
+export {registerUser, loginUser,displayUser,displayUserById,editUser,deleteUser};

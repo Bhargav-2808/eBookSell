@@ -18,6 +18,11 @@ function Header() {
             <p className="_dash">|</p>
             <Link to="/register" className="_navlink">
               Register
+         
+            </Link>
+            <p className="_dash">|</p>
+            <Link to="/displayuser" className="_navlink">
+              User
             </Link>
           </Nav>
           <img src={cart} className="ms-3" alt="logo" />
