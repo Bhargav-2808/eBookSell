@@ -1,10 +1,11 @@
 import React, { useEffect } from "react";
 import { Col, Container, Form, Row } from "react-bootstrap";
 import { useForm } from "react-hook-form";
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import { displayUser, displayUserById, editUser } from "../../api";
 
 const EditUser = () => {
+  const navigate = useNavigate();
   const {id} = useParams();    
   const {
     register,
@@ -20,8 +21,10 @@ const EditUser = () => {
   const onSubmit = async (data) => {
      //console.log(data);
      let response = await editUser(data,id);
-    // if (response) {
-    //   // navigate("/login");
+    if (response) {
+      navigate("/displayuser");
+    }
+
   };
   const loadUsersData = async() =>{
     const response = await displayUserById(id);

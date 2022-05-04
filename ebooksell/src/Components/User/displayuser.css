@@ -1,43 +1,57 @@
-.user-edit{
-    color: #f14d54;
-    background-color: white;
-    padding: 3px 5px;
-    font-size: 13px;
-    margin-left: 10px;
-    border: 1px solid #f14d54;
-    border-radius: 3px;
-    text-decoration: none;
+.user-edit {
+  color: #f14d54;
+  background-color: white;
+  padding: 3px 5px;
+  font-size: 13px;
+  margin-left: 10px;
+  border: 1px solid #f14d54;
+  border-radius: 3px;
+  text-decoration: none;
 }
-.usere-edit:hover{
-    text-decoration: none ;
-    color: #f14d54;
-
-}.usere-delete:hover{
-    color: #80bf32;
-    text-decoration: none ;
-
-    
+.usere-edit:hover {
+  text-decoration: none;
+  color: #f14d54;
+}
+.usere-delete:hover {
+  color: #80bf32;
+  text-decoration: none;
 }
 .usere-edit {
-    text-decoration: none ;
-    color: #f14d54;
-
-
-}.usere-delete {
-    text-decoration: none ;
-    color: #80bf32;
-    
-
+  text-decoration: none;
+  color: #f14d54;
+}
+.usere-delete {
+  text-decoration: none;
+  color: #80bf32;
 }
 
-.user-delete{
-    color: #80bf32;
-    text-decoration: none;
-    background-color: white;
-    padding: 3px 5px;
-    font-size: 13px;
-    margin-left: 10px;
-    border: 1px solid #80bf32;
-    border-radius: 3px;
-
+.user-delete {
+  color: #80bf32;
+  text-decoration: none;
+  background-color: white;
+  padding: 3px 5px;
+  font-size: 13px;
+  margin-left: 10px;
+  border: 1px solid #80bf32;
+  border-radius: 3px;
+}
+.user-delete:hover {
+  color: #80bf32;
+  text-decoration: none;
+  background-color: white;
+  padding: 3px 5px;
+  font-size: 13px;
+  margin-left: 10px;
+  border: 1px solid #80bf32;
+  border-radius: 3px;
+}
+.popDelete {
+  background-color: #80bf32 !important ;
+  color: white !important;
+  border: none;
+}
+.popCancel {
+  background-color: #f14d54 !important ;
+  color: white !important;
+  border: none;
 }
