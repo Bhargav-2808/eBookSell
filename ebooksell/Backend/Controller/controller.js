@@ -146,21 +146,44 @@ const deleteUser = async (request, response) => {
 
 const paginateUser = async (req, res) => {
   const page = req.query.page || 1;
-  console.log(page);
-  
+
   const perPage = req.query.perPage || 4;
+
+  const searchQuery = req.query.search;
 
   try {
     const count = await User.countDocuments({});
-    const totalPages = Math.ceil(count/perPage);
-    const user = await User.find({})
-      .sort({ firstname: 1, lastname: 1 })
-      .skip((page - 1) * parseInt(perPage))
-      .limit(parseInt(perPage));
+    const totalPages = Math.ceil(count / perPage);
+
+    let searchData;
+    console.log(searchQuery);
+    if (searchQuery === "") {
+      searchData = await User.find({})
+        .sort({ firstname: 1, lastname: 1 })
+        .skip((page - 1) * parseInt(perPage))
+        .limit(parseInt(perPage));
+    } else {
+      searchData = await User.find({
+        $or: [
+          { firstname: { $regex: searchQuery } },
+          { lastname: { $regex: searchQuery } },
+          { role: { $regex: searchQuery } },
+          { email: { $regex: searchQuery } },
+        ],
+      })
+        .sort({ firstname: 1, lastname: 1 })
+        .skip((page - 1) * parseInt(perPage))
+        .limit(parseInt(perPage));
+    }
+
+    // const user = await User.find({})
+    //   .sort({ firstname: 1, lastname: 1 })
+    //   .skip((page - 1) * parseInt(perPage))
+    //   .limit(parseInt(perPage));
 
     res.status(200).json({
       count,
-      user,
+      searchData,
       totalPages,
     });
   } catch (error) {

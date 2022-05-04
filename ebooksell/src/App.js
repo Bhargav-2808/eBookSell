@@ -16,7 +16,7 @@ function App() {
   return (
     <>
       <Header />
-      <Search />
+    
       {/* <Login/> */}
       {/* <Register/> */}
       {/* <ProductPage/> */}

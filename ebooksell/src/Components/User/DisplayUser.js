@@ -1,14 +1,6 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useContext } from "react";
 import "react-confirm-alert/src/react-confirm-alert.css";
-import {
-  Button,
-  Col,
-  Container,
-  Modal,
-  Pagination,
-  Row,
-  Table,
-} from "react-bootstrap";
+import { Button, Col, Container, Row, Table } from "react-bootstrap";
 import "./displayuser.css";
 import ArrowBackIosNewIcon from "@mui/icons-material/ArrowBackIosNew";
 import ArrowForwardIosIcon from "@mui/icons-material/ArrowForwardIos";
@@ -16,6 +8,8 @@ import { deleteUser, displayUser, paginateUser } from "../../api";
 import { Link } from "react-router-dom";
 import { confirmAlert } from "react-confirm-alert";
 import { IconButton } from "@mui/material";
+import Search from "../Search/Search";
+import { Global } from "../Search/Search";
 
 const DisplayUser = () => {
   const [data, setData] = useState();
@@ -23,19 +17,26 @@ const DisplayUser = () => {
   const [perPage, setperPage] = useState(1);
   const [totalPages, settotalPages] = useState();
   const [page, setPage] = useState(1);
+  const [search, setSearch] = useState("");
+
+  console.log(search);
+  const searchData = (data) => {
+    // console.log(data);
+    setSearch(data);
+  };
 
   console.log(page);
-  console.log(data, pageCount, totalPages, perPage);
+  console.log(data, pageCount, totalPages, perPage, search);
 
   useEffect(() => {
     displayUserData();
-  }, [page, perPage]);
+  }, [page, perPage, search]);
   const displayUserData = async () => {
     // const response = await displayUser();
     // setData(response?.data);
-    const response = await paginateUser(page, perPage);
+    const response = await paginateUser(page, perPage, search);
     //console.log(response?.data);
-    setData(response?.data?.user);
+    setData(response?.data?.searchData);
     setpageCount(response?.data?.count);
     settotalPages(response?.data?.totalPages);
   };
@@ -45,6 +46,7 @@ const DisplayUser = () => {
   };
   return (
     <>
+      <Search searchData={searchData} />
       <Container className="mt-2">
         <Row>
           <Col className="d-flex justify-content-center">
@@ -137,9 +139,7 @@ const DisplayUser = () => {
                     setperPage(parseInt(e.target.value));
                   }}
                 >
-                  <option>1</option>
                   <option>2</option>
-                  <option>3</option>
                   <option>4</option>
                 </select>
               </form>

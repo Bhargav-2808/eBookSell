@@ -24,8 +24,8 @@ const deleteUser = async (id) => {
   return await axios.delete(`${URL}/${id}`);
 };
 
-const paginateUser = async (page, perPage) => {
-  return await axios.get(`${URL}?page=${page}&perPage=${perPage}`);
+const paginateUser = async (page, perPage,search) => {
+  return await axios.get(`${URL}?page=${page}&perPage=${perPage}&search=${search}`);
 };
 export {
   registerUser,
