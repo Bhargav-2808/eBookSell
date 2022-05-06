@@ -1,7 +1,6 @@
-import User from "./../Model/user.js";
+import { User, Category } from "./../Model/user.js";
 import mongoose from "mongoose";
-import crypto from "crypto";
-import assert from "assert";
+
 import bcrypt from "bcrypt";
 
 const registerUser = async (req, res) => {
@@ -12,9 +11,7 @@ const registerUser = async (req, res) => {
 
   const pass = req.body.password;
   const cpass = req.body.cpassword;
-  const role = "buyer"; //  console.log(req.body.fname);
-  //  console.log(req.body.lname);
-
+  const role = "buyer";
   try {
     const userExist = await User.findOne({ email: uemail });
     if (userExist) {
@@ -23,20 +20,6 @@ const registerUser = async (req, res) => {
       if (pass == cpass) {
         const salt = bcrypt.genSaltSync(10);
         const encrypted = bcrypt.hashSync(pass, salt);
-
-        // const algorithm = "aes256";
-        // const Securitykey = crypto.randomBytes(32);
-        // const initVector = crypto.randomBytes(16);
-        // console.log(Securitykey);
-        // console.log(initVector);
-        // crypto.createHash;
-        // const cipher = crypto.createCipheriv(
-        //   algorithm,
-        //   Securitykey,
-        //   initVector
-        // );
-        // const encrypted =
-        //   cipher.update(pass, "utf8", "hex") + cipher.final("hex");
 
         const newUser = await new User({
           _id: new mongoose.Types.ObjectId(),
@@ -73,24 +56,6 @@ const loginUser = async (req, res) => {
     const luser = await User.findOne({ email: lemail });
 
     if (luser) {
-      // res.send("user found")
-      // console.log(luser.password);
-      // const algorithm = "aes256";
-      // const Securitykey = crypto.randomBytes(32);
-      // const initVector = crypto.randomBytes(16);
-      // console.log(Securitykey);
-      // console.log(initVector);
-
-      // const decipher = crypto.createDecipheriv(
-      //   algorithm,
-      //   Securitykey,
-      //   initVector
-      // );
-      // //decipher.setAutoPadding(false);
-      // const decrypted =
-      //   decipher.update("b0d28fb7f2c1bd8ee9fdbc7de2cf7530", "hex", "utf8") +
-      //   decipher.final("utf8");
-      // console.log(decrypted);
       const decrypted = bcrypt.compareSync(password, luser.password);
       if (decrypted) {
         res.status(200).json({ Success: "Login Successfull." });
@@ -131,10 +96,12 @@ const editUser = async (req, res) => {
       res.status(200).json({ message: "Update successful!" });
     })
     .catch((error) => {
-      res.send(error.message);
-      console.log(error);
+      res.status(400).json({
+        error: error.message,
+      });
     });
 };
+
 const deleteUser = async (request, response) => {
   try {
     await User.deleteOne({ _id: request.params.id });
@@ -165,21 +132,16 @@ const paginateUser = async (req, res) => {
     } else {
       searchData = await User.find({
         $or: [
-          { firstname: { $regex: searchQuery } },
-          { lastname: { $regex: searchQuery } },
-          { role: { $regex: searchQuery } },
-          { email: { $regex: searchQuery } },
+          { firstname: { $regex: searchQuery ,$options: 'i'} },
+          { lastname: { $regex: searchQuery,$options: 'i' } },
+          { role: { $regex: searchQuery ,$options: 'i'} },
+          { email: { $regex: searchQuery,$options: 'i' } },
         ],
       })
         .sort({ firstname: 1, lastname: 1 })
         .skip((page - 1) * parseInt(perPage))
         .limit(parseInt(perPage));
     }
-
-    // const user = await User.find({})
-    //   .sort({ firstname: 1, lastname: 1 })
-    //   .skip((page - 1) * parseInt(perPage))
-    //   .limit(parseInt(perPage));
 
     res.status(200).json({
       count,
@@ -193,6 +155,111 @@ const paginateUser = async (req, res) => {
   }
 };
 
+const addCategory = async (req, res) => {
+  const category = req.body.category;
+
+  // console.log(category);
+  const categoryExist = await Category.findOne({ category: category });
+  try {
+    if (categoryExist) {
+      res.status(400).json({
+        error: "Category Already Exist",
+      });
+    } else {
+      const newCategory = await new Category({
+        _id: new mongoose.Types.ObjectId(),
+        category: category,
+      }).save();
+
+      try {
+        res.status(200).json({
+          success: "Category added successfully",
+        });
+      } catch (error) {
+        res.status(401).json({
+          Fail: "Error occurred",
+          error: error,
+        });
+      }
+    }
+  } catch (error) {
+    res.status(500).json({
+      Fail: "Internal Server Error",
+      error: error,
+    });
+  }
+};
+
+const displayCategory = async (req, res) => {
+  const page = req.query.page;
+  const perPage = req.query.perPage;
+  const searchQuery = req.query.search;
+
+
+  console.log(page,perPage,searchQuery);
+  try {
+    const count = await Category.countDocuments({});
+    const totalPages = Math.ceil(count / perPage);
+
+    let searchCategory;
+    if (searchQuery === "") {
+      searchCategory = await Category.find({})
+        .sort({ category: 1 })
+        .skip((page - 1) * parseInt(perPage))
+        .limit(parseInt(perPage));
+    } else {
+      searchCategory = await Category.find({
+        $or: [{ category: { $regex: searchQuery ,$options: 'i'} }],
+      })
+        .sort({ category: 1 })
+        .skip((page - 1) * parseInt(perPage))
+        .limit(parseInt(perPage));
+    }
+
+    res.status(200).json({
+      count,
+      searchCategory,
+      totalPages,
+    });
+  } catch (error) {
+    res.status(409).json({ message: error.message });
+  }
+};
+
+const displayCategoryById = async (req, res) => {
+  const category = await Category.findById(req.params.id);
+
+  console.log(category);
+  try {
+    res.status(200).json(category);
+  } catch (error) {
+    res.status(409).json({ message: error.message });
+  }
+};
+
+const editCategory = async (req, res) => {
+  Category.updateOne({ _id: req.params.id }, req.body)
+    .then((result) => {
+      res.status(200).json({ message: "Update successful!" });
+    })
+    .catch((error) => {
+      res.status(400).json({
+        error: error.message,
+      });
+
+      console.log(error);
+    });
+};
+
+const deleteCategory = async (request, response) => {
+  try {
+    await Category.deleteOne({ _id: request.params.id });
+    response.status(201).json("Category deleted Successfully");
+  } catch (error) {
+    response.status(409).json({ message: error.message });
+  }
+};
+
 export {
   registerUser,
   loginUser,
@@ -201,4 +268,9 @@ export {
   editUser,
   deleteUser,
   paginateUser,
+  addCategory,
+  displayCategory,
+  displayCategoryById,
+  editCategory,
+  deleteCategory,
 };

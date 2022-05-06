@@ -1,20 +1,18 @@
-import React, { useEffect, useState, useContext } from "react";
-import "react-confirm-alert/src/react-confirm-alert.css";
-import { Button, Col, Container, Row, Table } from "react-bootstrap";
-import "./displayuser.css";
+import { IconButton } from "@mui/material";
+import { Button } from "react-bootstrap";
+import React, { useEffect, useState } from "react";
+import { Col, Container, Row, Table } from "react-bootstrap";
+import { confirmAlert } from "react-confirm-alert";
+import { Link } from "react-router-dom";
+import { deleteCategory, displayCategory } from "../../../api";
+import Search from "../../Search/Search";
 import ArrowBackIosNewIcon from "@mui/icons-material/ArrowBackIosNew";
 import ArrowForwardIosIcon from "@mui/icons-material/ArrowForwardIos";
-import { deleteUser, displayUser, paginateUser } from "../../api";
-import { Link } from "react-router-dom";
-import { confirmAlert } from "react-confirm-alert";
-import { IconButton } from "@mui/material";
-import Search from "../Search/Search";
-import { Global } from "../Search/Search";
 
-const DisplayUser = () => {
+const DisplayCategory = () => {
   const [data, setData] = useState();
   const [pageCount, setpageCount] = useState();
-  const [perPage, setperPage] = useState(2);
+  const [perPage, setperPage] = useState(4);
   const [totalPages, settotalPages] = useState();
   const [page, setPage] = useState(1);
   const [search, setSearch] = useState("");
@@ -29,20 +27,22 @@ const DisplayUser = () => {
   console.log(data, pageCount, totalPages, perPage, search);
 
   useEffect(() => {
-    displayUserData();
+    displayCategoryData();
   }, [page, perPage, search]);
-  const displayUserData = async () => {
-    // const response = await displayUser();
+  const displayCategoryData = async () => {
+    const response = await displayCategory(page,perPage,search);
+    console.log(response);
+     // const response = await displayUser();
     // setData(response?.data);
-    const response = await paginateUser(page, perPage, search);
+    // const response = await paginateUser(page, perPage, search);
     //console.log(response?.data);
-    setData(response?.data?.searchData);
+    setData(response?.data?.searchCategory);
     setpageCount(response?.data?.count);
     settotalPages(response?.data?.totalPages);
   };
-  const deleteUserData = async (id) => {
-    await deleteUser(id);
-    displayUserData();
+  const deleteCategoryData = async (id) => {
+    await deleteCategory(id);
+    displayCategoryData();
   };
   return (
     <>
@@ -50,37 +50,32 @@ const DisplayUser = () => {
       <Container className="mt-2">
         <Row>
           <Col className="d-flex justify-content-center">
-            <h4>User Page</h4>
+            <h4>Category Page</h4>
           </Col>
         </Row>
 
         <Row>
           <Col>
-            <h5>Total User : {pageCount}</h5>
+            <h5>Total Category : {pageCount}</h5>
             <Table responsive="lg" className="mt-2">
               <thead>
                 <tr>
                   <th>ID</th>
-                  <th>First Name</th>
-                  <th>Last Name</th>
-                  <th>Email</th>
-                  <th>Role</th>
+                  <th>Category</th>
                 </tr>
               </thead>
               <tbody>
-                {data?.map((udata, index) => {
+                {data?.map((category, index) => {
                   return (
-                    <tr key={udata._id + udata.firstname}>
+                    <tr key={category._id + category.category}>
                       <td>{index + 1}</td>
-                      <td>{udata.firstname}</td>
-                      <td>{udata.lastname}</td>
-                      <td>{udata.email}</td>
-                      <td>{udata.role}</td>
+                      <td>{category.category}</td>
+
                       <td>
                         <button className="user-edit" type="submit">
                           <Link
                             className="usere-edit"
-                            to={`/edituser/${udata?._id}`}
+                            to={`/editcategory/${category?._id}`}
                           >
                             Edit
                           </Link>
@@ -105,7 +100,7 @@ const DisplayUser = () => {
                                       <Button
                                         className="popDelete"
                                         onClick={() => {
-                                          deleteUserData(udata?._id);
+                                          deleteCategoryData(category?._id);
                                           onClose();
                                         }}
                                       >
@@ -172,4 +167,4 @@ const DisplayUser = () => {
   );
 };
 
-export default DisplayUser;
+export default DisplayCategory;

@@ -27,6 +27,27 @@ const deleteUser = async (id) => {
 const paginateUser = async (page, perPage,search) => {
   return await axios.get(`${URL}?page=${page}&perPage=${perPage}&search=${search}`);
 };
+
+const addCategory = async (category) => {
+  return axios.post(`${URL}/addcategory`, category);
+};
+
+const displayCategory = async (page,perPage,search) => {
+  return axios.get(`${URL}/displaycategory?page=${page}&perPage=${perPage}&search=${search}`);
+};
+const displayCategoryById = async (id) => {
+  return axios.get(`${URL}/displaycategory/${id}`);
+};
+
+const editCategory = async (category, id) => {
+  return axios.put(`${URL}/editcategory/${id}`, category);
+};
+
+const deleteCategory = async (id) => {
+  return await axios.delete(`${URL}/deletecategory/${id}`);
+};
+
+
 export {
   registerUser,
   loginUser,
@@ -35,4 +56,9 @@ export {
   editUser,
   deleteUser,
   paginateUser,
+  addCategory,
+  displayCategory,
+  displayCategoryById,
+  editCategory,
+  deleteCategory
 };

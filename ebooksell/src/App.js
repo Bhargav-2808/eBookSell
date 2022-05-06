@@ -1,5 +1,9 @@
 import { Route, Routes } from "react-router-dom";
 import "./App.css";
+import AddProduct from "./Components/Add-Product/AddProduct";
+import AddCategory from "./Components/BookCategory/AddCategory";
+import DisplayCategory from "./Components/BookCategory/DisplayCategory/DisplayCategory";
+import EditCategory from "./Components/BookCategory/Edit-Category/EditCategory";
 import Cart from "./Components/Cart/Cart";
 import EditProduct from "./Components/Edit-Product-FInal/EditProduct";
 import Footer from "./Components/Footer/Footer";
@@ -30,7 +34,11 @@ function App() {
           <Route exact path="/editproduct" element={<EditProduct />}/>
           <Route exact path="/productlist" element={<ProductList />}/>
           <Route exact path="/displayuser" element={<DisplayUser />}/>
+          <Route exact path="/displaycategory" element={<DisplayCategory />}/>
           <Route exact path="/edituser/:id" element={<EditUser />}/>
+          <Route exact path="/addproduct" element={<AddProduct />}/>
+          <Route exact path="/addcategory" element={<AddCategory/>}/>
+          <Route exact path="/editcategory/:id" element={<EditCategory/>}/>
 
 
         </Routes> 
