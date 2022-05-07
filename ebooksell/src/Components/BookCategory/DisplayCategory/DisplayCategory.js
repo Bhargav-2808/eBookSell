@@ -19,7 +19,7 @@ const DisplayCategory = () => {
 
   console.log(search);
   const searchData = (data) => {
-    // console.log(data);
+    
     setSearch(data);
   };
 

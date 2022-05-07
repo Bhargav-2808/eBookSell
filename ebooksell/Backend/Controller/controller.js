@@ -7,10 +7,11 @@ import fs from 'fs';
 const __dirname = path.resolve(path.dirname(""));
 const storage = multer.diskStorage({
   destination: (req, file, cb) => {
-    cb(null, path.join(__dirname, "./images/"));
+    cb(null, path.join("C:/projects/E-book-sell/ebooksell", '/public/images/uploads/'));
   },
   filename: (req, file, cb) => {
-    cb(null, file.originalname + "-" + Date.now());
+    const ext= file.mimetype.split('/')[1];
+    cb(null, `img-${Date.now()}.${ext}` );
   },
 });
 
@@ -309,7 +310,8 @@ const addBook = async (req, res) => {
     const category = req.body.category;
     const price = req.body.price;
     const description = req.body.description;
-     const img = req?.file;
+    const file = req.file.path.replace(/\\/g,"/" )
+  
     // var img = fs.readFileSync(req.file.path);
     // var encode_img = img.toString("base64");
     // var final_img = {
@@ -324,7 +326,7 @@ const addBook = async (req, res) => {
       category: category,
       price: price,
       description: description,
-      base64image: JSON.stringify(img),
+      base64image: file,
     }).save();
 
     try {
@@ -342,6 +344,18 @@ const addBook = async (req, res) => {
   }
 };
 
+
+const getBook =async(req,res) =>{
+  const book = await Book.find({});
+
+  try {
+    res.status(200).json(book);
+  } catch (error) {
+    res.status(409).json({ message: error.message });
+  }
+}
+
+
 export {
   registerUser,
   loginUser,
@@ -357,4 +371,5 @@ export {
   deleteCategory,
   displayCategory,
   addBook,
+  getBook
 };

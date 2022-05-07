@@ -56,6 +56,10 @@ const addBook = async (book) => {
 };
 
 
+const displayBook = async () => {
+  return axios.get(`${URL}/getbook`);
+};
+
 export {
   registerUser,
   loginUser,
@@ -70,5 +74,6 @@ export {
   editCategory,
   deleteCategory,
   displayCategory,
-  addBook
+  addBook,
+  displayBook
 };

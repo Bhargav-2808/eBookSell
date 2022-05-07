@@ -14,7 +14,8 @@ import {
   paginateCategory,
   displayCategory,
   addBook,
-  upload
+  upload,
+  getBook
 } from "../Controller/controller.js";
 const route = express.Router();
 
@@ -22,6 +23,7 @@ const route = express.Router();
 route.get("/", paginateUser);
 route.get("/paginateCategory", paginateCategory);
 route.get("/displaycategory", displayCategory);
+route.get("/getbook", getBook);
 route.get("/:id", displayUserById);
 route.get("/displaycategory/:id", displayCategoryById);
 route.post("/registerUser", registerUser);

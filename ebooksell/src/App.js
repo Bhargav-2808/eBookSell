@@ -9,8 +9,8 @@ import EditProduct from "./Components/Edit-Product-FInal/EditProduct";
 import Footer from "./Components/Footer/Footer";
 import Header from "./Components/Header/Header";
 import Login from "./Components/Login/Login";
-import ProductList from "./Components/Product-List/ProductList";
-import ProductPage from "./Components/Product-Page/ProductPage";
+import DisplayProduct from './Components/Add-Product/DisplayProduct/DisplayProduct'
+import ProductPage from "./Components/Add-Product/Product-Page/ProductPage";
 import Register from "./Components/Register/Register";
 import Search from "./Components/Search/Search";
 import DisplayUser from "./Components/User/DisplayUser";
@@ -20,7 +20,7 @@ function App() {
   return (
     <>
       <Header />
-    
+
       {/* <Login/> */}
       {/* <Register/> */}
       {/* <ProductPage/> */}
@@ -28,20 +28,19 @@ function App() {
       {/* <ProductList /> */}
       {/* <Cart/> */}
       <Routes>
-          <Route exact path='/' element={<ProductPage/>}/>
-          <Route exact path="/login" element={<Login />}/>
-          <Route exact path="/register" element={<Register />}/>
-          <Route exact path="/editproduct" element={<EditProduct />}/>
-          <Route exact path="/productlist" element={<ProductList />}/>
-          <Route exact path="/displayuser" element={<DisplayUser />}/>
-          <Route exact path="/displaycategory" element={<DisplayCategory />}/>
-          <Route exact path="/edituser/:id" element={<EditUser />}/>
-          <Route exact path="/addproduct" element={<AddProduct />}/>
-          <Route exact path="/addcategory" element={<AddCategory/>}/>
-          <Route exact path="/editcategory/:id" element={<EditCategory/>}/>
+        <Route exact path="/" element={<ProductPage />} />
+        <Route exact path="/login" element={<Login />} />
+        <Route exact path="/register" element={<Register />} />
+        <Route exact path="/editproduct/:id" element={<EditProduct />} />
+        <Route exact path="/displayproduct" element={<DisplayProduct />} />
+        <Route exact path="/displayuser" element={<DisplayUser />} />
+        <Route exact path="/displaycategory" element={<DisplayCategory />} />
+        <Route exact path="/edituser/:id" element={<EditUser />} />
+        <Route exact path="/addproduct" element={<AddProduct />} />
 
-
-        </Routes> 
+        <Route exact path="/addcategory" element={<AddCategory />} />
+        <Route exact path="/editcategory/:id" element={<EditCategory />} />
+      </Routes>
       <Footer />
     </>
   );

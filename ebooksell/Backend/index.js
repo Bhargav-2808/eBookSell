@@ -15,7 +15,7 @@ app.use(cors());
 app.use(bodyParser.urlencoded({extended:true}));
 app.use(bodyParser.json({extended:true}));
 app.use("/",route)
-app.use(express.static(path.join(__dirname, '/images/')));
+app.use(express.static(path.join("C:/projects/E-book-sell/ebooksell", '/public/images/uploads/')));
 // app.use(express.static(path.join(__dirname, 'public')));
 // app.use(express.bodyParser({keepExtensions:true,uploadDir:path.join(__dirname,'/images/')}));
 
@@ -29,7 +29,7 @@ mangoos.connect( URL,
         useUnifiedTopology:true
         
     }).then( ()=>{
-        // console.log(__dirname);
+        //  console.log(__dirname);
         console.log("Connected to datatbase");
     }).catch((error)=>{
         console.log(error+' This error ocuured');
