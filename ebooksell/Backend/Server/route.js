@@ -8,21 +8,26 @@ import {
   deleteUser,
   paginateUser,
   addCategory,
-  displayCategory,
   displayCategoryById,
   editCategory,
   deleteCategory,
+  paginateCategory,
+  displayCategory,
+  addBook,
+  upload
 } from "../Controller/controller.js";
 const route = express.Router();
 
 // route.get("/",displayUser);
 route.get("/", paginateUser);
+route.get("/paginateCategory", paginateCategory);
 route.get("/displaycategory", displayCategory);
 route.get("/:id", displayUserById);
 route.get("/displaycategory/:id", displayCategoryById);
 route.post("/registerUser", registerUser);
 route.post("/loginUser", loginUser);
 route.post("/addcategory", addCategory);
+route.post("/addbook",upload.single('picture'), addBook);
 route.put("/:id", editUser);
 route.put("/editcategory/:id", editCategory);
 route.delete("/:id", deleteUser);

@@ -4,7 +4,7 @@ import React, { useEffect, useState } from "react";
 import { Col, Container, Row, Table } from "react-bootstrap";
 import { confirmAlert } from "react-confirm-alert";
 import { Link } from "react-router-dom";
-import { deleteCategory, displayCategory } from "../../../api";
+import { deleteCategory,  paginateCategory } from "../../../api";
 import Search from "../../Search/Search";
 import ArrowBackIosNewIcon from "@mui/icons-material/ArrowBackIosNew";
 import ArrowForwardIosIcon from "@mui/icons-material/ArrowForwardIos";
@@ -30,7 +30,7 @@ const DisplayCategory = () => {
     displayCategoryData();
   }, [page, perPage, search]);
   const displayCategoryData = async () => {
-    const response = await displayCategory(page,perPage,search);
+    const response = await paginateCategory(page,perPage,search);
     console.log(response);
      // const response = await displayUser();
     // setData(response?.data);

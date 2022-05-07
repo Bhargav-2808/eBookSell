@@ -32,8 +32,8 @@ const addCategory = async (category) => {
   return axios.post(`${URL}/addcategory`, category);
 };
 
-const displayCategory = async (page,perPage,search) => {
-  return axios.get(`${URL}/displaycategory?page=${page}&perPage=${perPage}&search=${search}`);
+const paginateCategory = async (page,perPage,search) => {
+  return axios.get(`${URL}/paginateCategory?page=${page}&perPage=${perPage}&search=${search}`);
 };
 const displayCategoryById = async (id) => {
   return axios.get(`${URL}/displaycategory/${id}`);
@@ -47,6 +47,14 @@ const deleteCategory = async (id) => {
   return await axios.delete(`${URL}/deletecategory/${id}`);
 };
 
+const displayCategory = async () => {
+  return axios.get(`${URL}/displaycategory`);
+};
+
+const addBook = async (book) => {
+  return axios.post(`${URL}/addbook`, book);
+};
+
 
 export {
   registerUser,
@@ -57,8 +65,10 @@ export {
   deleteUser,
   paginateUser,
   addCategory,
-  displayCategory,
+  paginateCategory,
   displayCategoryById,
   editCategory,
-  deleteCategory
+  deleteCategory,
+  displayCategory,
+  addBook
 };

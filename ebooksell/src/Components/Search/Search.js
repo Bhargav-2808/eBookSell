@@ -30,16 +30,7 @@ function Search(props) {
                 </em>
                 Search
               </button>
-              <button
-                style={{
-                  backgroundColor: "#f14d54",
-                  color: "white ",
-                  height: "40px",
-                  padding: "0 15px",
-                }}
-              >
-                Cancel
-              </button>
+              
             </Col>
           </Row>
         </Container>

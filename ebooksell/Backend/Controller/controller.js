@@ -1,7 +1,32 @@
-import { User, Category } from "./../Model/user.js";
+import { User, Category, Book } from "./../Model/user.js";
 import mongoose from "mongoose";
-
 import bcrypt from "bcrypt";
+import multer from "multer";
+import path from "path";
+import fs from 'fs';
+const __dirname = path.resolve(path.dirname(""));
+const storage = multer.diskStorage({
+  destination: (req, file, cb) => {
+    cb(null, path.join(__dirname, "./images/"));
+  },
+  filename: (req, file, cb) => {
+    cb(null, file.originalname + "-" + Date.now());
+  },
+});
+
+// const fileFilter = (req, file, cb) => {
+//   const allowedFileTypes = ["image/jpeg", "image/jpg", "image/png"];
+//   if (allowedFileTypes.includes(file.mimetype)) {
+//     cb(null, true);
+//   } else {
+//     cb(null, false);
+//   }
+// };
+
+export const upload = multer({
+  storage: storage,
+  limits: { fieldSize: 10 * 1024 * 1024 },
+});
 
 const registerUser = async (req, res) => {
   const fname = req.body.fname;
@@ -132,10 +157,10 @@ const paginateUser = async (req, res) => {
     } else {
       searchData = await User.find({
         $or: [
-          { firstname: { $regex: searchQuery ,$options: 'i'} },
-          { lastname: { $regex: searchQuery,$options: 'i' } },
-          { role: { $regex: searchQuery ,$options: 'i'} },
-          { email: { $regex: searchQuery,$options: 'i' } },
+          { firstname: { $regex: searchQuery, $options: "i" } },
+          { lastname: { $regex: searchQuery, $options: "i" } },
+          { role: { $regex: searchQuery, $options: "i" } },
+          { email: { $regex: searchQuery, $options: "i" } },
         ],
       })
         .sort({ firstname: 1, lastname: 1 })
@@ -190,13 +215,12 @@ const addCategory = async (req, res) => {
   }
 };
 
-const displayCategory = async (req, res) => {
+const paginateCategory = async (req, res) => {
   const page = req.query.page;
   const perPage = req.query.perPage;
   const searchQuery = req.query.search;
 
-
-  console.log(page,perPage,searchQuery);
+  // console.log(page,perPage,searchQuery);
   try {
     const count = await Category.countDocuments({});
     const totalPages = Math.ceil(count / perPage);
@@ -209,7 +233,7 @@ const displayCategory = async (req, res) => {
         .limit(parseInt(perPage));
     } else {
       searchCategory = await Category.find({
-        $or: [{ category: { $regex: searchQuery ,$options: 'i'} }],
+        $or: [{ category: { $regex: searchQuery, $options: "i" } }],
       })
         .sort({ category: 1 })
         .skip((page - 1) * parseInt(perPage))
@@ -260,6 +284,64 @@ const deleteCategory = async (request, response) => {
   }
 };
 
+const displayCategory = async (req, res) => {
+  const user = await Category.find();
+  // console.log(user);
+  try {
+    res.status(200).json(user);
+  } catch (error) {
+    res.status(409).json({ message: error.message });
+  }
+};
+
+const addBook = async (req, res) => {
+  // try {
+  //   console.log(picture);
+  // } catch (error) {
+  //   res.send(error.message);
+  // }
+  // console.log(fn,picture)
+  // console.log(req.files);
+
+  try {
+    const fname = req.body.fname;
+    const lname = req.body.lname;
+    const category = req.body.category;
+    const price = req.body.price;
+    const description = req.body.description;
+     const img = req?.file;
+    // var img = fs.readFileSync(req.file.path);
+    // var encode_img = img.toString("base64");
+    // var final_img = {
+    //   contentType: req.file.mimetype,
+    //   image: new Buffer(encode_img, "base64"),
+    // };
+    // console.log(img,final_img);
+    const book = await new Book({
+      _id: new mongoose.Types.ObjectId(),
+      firstname: fname,
+      lastname: lname,
+      category: category,
+      price: price,
+      description: description,
+      base64image: JSON.stringify(img),
+    }).save();
+
+    try {
+      res.status(200).json({
+        success: "Category added successfully",
+      });
+    } catch (error) {
+      res.status(401).json({
+        Fail: "Error occurred",
+        error: error,
+      });
+    }
+  } catch (error) {
+    res.status(500).json({ message: error.message });
+  }
+};
+
 export {
   registerUser,
   loginUser,
@@ -269,8 +351,10 @@ export {
   deleteUser,
   paginateUser,
   addCategory,
-  displayCategory,
+  paginateCategory,
   displayCategoryById,
   editCategory,
   deleteCategory,
+  displayCategory,
+  addBook,
 };
