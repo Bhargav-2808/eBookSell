@@ -313,8 +313,8 @@ const addBook = async (req, res) => {
     const category = req.body.category;
     const price = req.body.price;
     const description = req.body.description;
-     const file = req.file.path.replace(/\\/g, "/");
-    
+    const file = req.file.path.replace(/\\/g, "/");
+
     // console.log(fname,lname,category,price,description,file);
     // var img = fs.readFileSync(req.file.path);
     // var encode_img = img.toString("base64");
@@ -349,12 +349,59 @@ const addBook = async (req, res) => {
 };
 
 const getBook = async (req, res) => {
-  const book = await Book.find({});
-
   try {
-    res.status(200).json(book);
+    const page = req.query.page || 1;
+    const perPage = req.query.perPage || 4;
+    const searchQuery = req.query.search;
+    const count = await Book.countDocuments({});
+    const totalPages = Math.ceil(count / parseInt(perPage));
+    console.log(page,perPage,searchQuery,count,totalPages);
+
+    let searchBook;
+    if (searchQuery === "") {
+      searchBook =await Book.find({})
+        .sort({
+          price: 1,
+          description: 1,
+          category: 1,
+        })
+        .skip((page - 1) * parseInt(perPage))
+        .limit(parseInt(perPage));
+
+
+        // console.log(searchBook);
+    } else {
+      searchBook =await Book.find({
+        $or: [
+          { description: { $regex: searchQuery, $options: "i" } },
+          { price: { $regex: searchQuery, $options: "i" } },
+          { category: { $regex: searchQuery, $options: "i" } },
+        ],
+      })
+        .sort({
+          price: 1,
+          description: 1,
+          category: 1,
+        })
+        .skip((page - 1) * parseInt(perPage))
+        .limit(parseInt(perPage));
+
+        // console.log(searchBook);
+
+    }
+
+    
+    try {
+      res.status(200).json(
+        {searchBook, count, totalPages}
+        );
+    } catch (error) {
+      res.status(409).json({ message: error.message });
+    }
   } catch (error) {
-    res.status(409).json({ message: error.message });
+    res.status(401).json({
+      error: error,
+    });
   }
 };
 
@@ -370,7 +417,6 @@ const getBookById = async (req, res) => {
 };
 
 const editBook = async (req, res) => {
-   
   const fname = req.body.fisrtname;
   const lname = req.body.lastname;
   const category = req.body.category;
@@ -380,14 +426,13 @@ const editBook = async (req, res) => {
   // console.log(file);
 
   const book = await new Book({
-  
     firstname: fname,
     lastname: lname,
     category: category,
     price: price,
     description: description,
     base64image: file,
-  })
+  });
   try {
     if (req.body && req.file) {
       Book.updateOne({ _id: req.params.id }, book)

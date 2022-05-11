@@ -56,8 +56,8 @@ const addBook = async (book) => {
 };
 
 
-const displayBook = async () => {
-  return axios.get(`${URL}/getbook`);
+const displayBook = async (page,perPage,search) => {
+  return axios.get(`${URL}/getbook?page=${page}&perPage=${perPage}&search=${search}`);
 };
 
 

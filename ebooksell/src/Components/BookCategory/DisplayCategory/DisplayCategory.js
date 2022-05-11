@@ -23,8 +23,8 @@ const DisplayCategory = () => {
     setSearch(data);
   };
 
-  console.log(page);
-  console.log(data, pageCount, totalPages, perPage, search);
+  // console.log(page);
+  // console.log(data, pageCount, totalPages, perPage, search);
 
   useEffect(() => {
     displayCategoryData();

@@ -6,21 +6,29 @@ import "./productlist.css";
 import { deleteBook, displayBook } from "../../../../api";
 import { Link } from "react-router-dom";
 import { confirmAlert } from "react-confirm-alert";
+import { IconButton } from "@mui/material";
 
 const ProductList = () => {
   const [data, setData] = useState([]);
+  const [search, setSearch] = useState("");
+  const [count, setCount] = useState();
+  const [page, setPage] = useState(1);
+  const [perPage, setPerPage] = useState(4);
+  const [totalPages, setTotalPages] = useState(4);
 
-  // console.log(data);
   useEffect(() => {
     displaybooklist();
-  }, []);
-  // console.log(data);
-  // console.log((data[21].description).split('!'));
-  // console.log(data.description[0]);
+  }, [page, perPage, search]);
+
+
+  console.log(data,search,count,page,perPage,totalPages);
   const displaybooklist = async () => {
-    const response = await displayBook();
+    const response = await displayBook(page, perPage, search);
     // console.log(response);
-    setData(response?.data);
+    setData(response?.data?.searchBook);
+
+    setCount(response?.data?.count);
+    setTotalPages(response?.data?.totalPages);
   };
   const deleteBookData = async (id) => {
     await deleteBook(id);
@@ -35,15 +43,21 @@ const ProductList = () => {
           </Col>
         </Row>
         <Row>
+
           <Col className="d-flex justify-content-end">
             <input type="text" placeholder="Search.." className="_input" />
-            <button className="_addCart" type="submit">
+            <button
+              className="_addCart"
+              type="submit"
+              onClick={(e) => setSearch(e.target.value)}
+            >
               Search
             </button>
           </Col>
         </Row>
         <Row>
           <Col>
+          <h5>Total Books : {count}</h5>
             <Table responsive="lg" className="mt-2">
               <thead>
                 <tr>
@@ -89,7 +103,7 @@ const ProductList = () => {
                                     <Button
                                       className="popDelete"
                                       onClick={() => {
-                                        deleteBookData(dataset?._id)
+                                        deleteBookData(dataset?._id);
                                         onClose();
                                       }}
                                     >
@@ -122,17 +136,29 @@ const ProductList = () => {
             <div className="d-flex me-5">
               <p className="me-3">Rows per page</p>
               <form>
-                <select>
-                  <option>1</option>
+                <select  onChange={(e) => {
+                    setPerPage(parseInt(e.target.value));
+                  }}>
                   <option>2</option>
-                  <option>3</option>
-                  <option>4</option>
+                  <option>5</option>
+                  <option>10</option>
+                  <option>15</option>
                 </select>
               </form>
             </div>
             <div>
-              <ArrowBackIosNewIcon className="_icon" />
-              <ArrowForwardIosIcon className="_icon" />
+              <IconButton
+                disabled={page === 1}
+                onClick={() => setPage(page - 1)}
+              >
+                <ArrowBackIosNewIcon className="_icon" />
+              </IconButton>
+              <IconButton
+                disabled={page === totalPages}
+                onClick={() => setPage(page + 1)}
+              >
+                <ArrowForwardIosIcon className="_icon" />
+              </IconButton>
             </div>
           </Col>
         </Row>
