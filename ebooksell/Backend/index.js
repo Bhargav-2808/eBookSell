@@ -15,7 +15,7 @@ app.use(cors());
 app.use(bodyParser.urlencoded({extended:true}));
 app.use(bodyParser.json({extended:true}));
 app.use("/",route)
-app.use(express.static(path.join("C:/projects/E-book-sell/ebooksell", '/public/images/uploads/')));
+app.use(express.static(path.join("C:/projects/E-book-sell/ebooksell", '/backend/images/')));
 // app.use(express.static(path.join(__dirname, 'public')));
 // app.use(express.bodyParser({keepExtensions:true,uploadDir:path.join(__dirname,'/images/')}));
 

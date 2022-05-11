@@ -60,6 +60,19 @@ const displayBook = async () => {
   return axios.get(`${URL}/getbook`);
 };
 
+
+const getBookById = async (id) => {
+  return axios.get(`${URL}/getbook/${id}`);
+};
+
+
+const editBook = async (book, id) => {
+  return axios.put(`${URL}/editbook/${id}`, book);
+};
+
+const deleteBook = async (id) => {
+  return await axios.delete(`${URL}/deletebook/${id}`);
+};
 export {
   registerUser,
   loginUser,
@@ -75,5 +88,8 @@ export {
   deleteCategory,
   displayCategory,
   addBook,
-  displayBook
+  displayBook,
+  getBookById,
+  editBook,
+  deleteBook
 };

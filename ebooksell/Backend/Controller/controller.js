@@ -3,15 +3,18 @@ import mongoose from "mongoose";
 import bcrypt from "bcrypt";
 import multer from "multer";
 import path from "path";
-import fs from 'fs';
+import fs from "fs";
 const __dirname = path.resolve(path.dirname(""));
 const storage = multer.diskStorage({
   destination: (req, file, cb) => {
-    cb(null, path.join("C:/projects/E-book-sell/ebooksell", '/public/images/uploads/'));
+    cb(
+      null,
+      path.join("C:/projects/E-book-sell/ebooksell", "/backend/images/")
+    );
   },
   filename: (req, file, cb) => {
-    const ext= file.mimetype.split('/')[1];
-    cb(null, `img-${Date.now()}.${ext}` );
+    const ext = file.mimetype.split("/")[1];
+    cb(null, `img-${Date.now()}.${ext}`);
   },
 });
 
@@ -310,8 +313,9 @@ const addBook = async (req, res) => {
     const category = req.body.category;
     const price = req.body.price;
     const description = req.body.description;
-    const file = req.file.path.replace(/\\/g,"/" )
-  
+     const file = req.file.path.replace(/\\/g, "/");
+    
+    // console.log(fname,lname,category,price,description,file);
     // var img = fs.readFileSync(req.file.path);
     // var encode_img = img.toString("base64");
     // var final_img = {
@@ -331,7 +335,7 @@ const addBook = async (req, res) => {
 
     try {
       res.status(200).json({
-        success: "Category added successfully",
+        success: "Book added successfully",
       });
     } catch (error) {
       res.status(401).json({
@@ -344,8 +348,7 @@ const addBook = async (req, res) => {
   }
 };
 
-
-const getBook =async(req,res) =>{
+const getBook = async (req, res) => {
   const book = await Book.find({});
 
   try {
@@ -353,8 +356,68 @@ const getBook =async(req,res) =>{
   } catch (error) {
     res.status(409).json({ message: error.message });
   }
-}
+};
 
+const getBookById = async (req, res) => {
+  const book = await Book.findById(req.params.id);
+
+  console.log(book);
+  try {
+    res.status(200).json(book);
+  } catch (error) {
+    res.status(409).json({ message: error.message });
+  }
+};
+
+const editBook = async (req, res) => {
+   
+  const fname = req.body.fisrtname;
+  const lname = req.body.lastname;
+  const category = req.body.category;
+  const price = req.body.price;
+  const description = req.body.description;
+  const file = req.file.path.replace(/\\/g, "/");
+  // console.log(file);
+
+  const book = await new Book({
+  
+    firstname: fname,
+    lastname: lname,
+    category: category,
+    price: price,
+    description: description,
+    base64image: file,
+  })
+  try {
+    if (req.body && req.file) {
+      Book.updateOne({ _id: req.params.id }, book)
+        .then((result) => {
+          console.log(result);
+          res.status(200).json({ message: "Update successful!" });
+        })
+        .catch((error) => {
+          res.status(400).json({
+            error: error.message,
+          });
+
+          console.log(error);
+        });
+    }
+  } catch (error) {
+    res.status(409).json({
+      error: "Body is Empty",
+    });
+  }
+};
+
+const deleteBook = async (request, response) => {
+  try {
+    await Book.deleteOne({ _id: request.params.id });
+    response.status(201).json("Category deleted Successfully");
+  } catch (error) {
+    response.status(409).json({ message: error.message });
+  }
+};
 
 export {
   registerUser,
@@ -371,5 +434,8 @@ export {
   deleteCategory,
   displayCategory,
   addBook,
-  getBook
+  getBook,
+  getBookById,
+  editBook,
+  deleteBook,
 };

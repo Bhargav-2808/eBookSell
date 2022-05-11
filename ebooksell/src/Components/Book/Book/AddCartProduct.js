@@ -1,10 +1,10 @@
 import React, { useEffect, useState } from "react";
-import "./displayProduct.css";
+import "./addcartproduct.css";
 import { Container, Row, Col, Pagination, Card } from "react-bootstrap";
 import dummy from "../../../Images/dummy-image.png";
 import { displayBook } from "../../../api";
 
-const ProductList = () => {
+const AddCartProduct = () => {
   const [data, setData] = useState([]);
 
   console.log(data);
@@ -21,7 +21,7 @@ const ProductList = () => {
 
   return (
     <>
-      <Container className="mt-2">
+      <Container className="mt-2 book-display-container">
         <Row className="mt-2">
           <Col className="d-flex justify-content-center">
             <h2>Display Product</h2>
@@ -52,7 +52,7 @@ const ProductList = () => {
           </Card> */}
 
           {data.map((dataset, index) => (
-            <Col className="mt-3">
+            <Col className="mt-3" >
               <Card
                 style={{ width: "200px", postion: "relative" }}
                 className="card-style"
@@ -74,7 +74,7 @@ const ProductList = () => {
                       </Card.Title>
                     </Col>
                   </Row>
-                  <Row style={{ height: "15vh" }} className="mt-2 p-3">
+                  <Row style={{ height: "9vh" }} className="mt-2 p-3">
                     <Col>
                       <p>
                         Category : <span className="">{dataset?.category}</span>
@@ -113,4 +113,4 @@ const ProductList = () => {
   );
 };
 
-export default ProductList;
+export default AddCartProduct;

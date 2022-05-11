@@ -1,8 +1,9 @@
 import React, { useEffect, useState } from "react";
 import { Col, Container, Form, Row } from "react-bootstrap";
 import { useForm } from "react-hook-form";
-import { addBook, displayCategory } from "../../api";
-const EditProduct = () => {
+import { addBook, displayCategory } from "../../../../api";
+import './addproduct.css'
+const AddProduct = () => {
   const [data, setData] = useState([]);
   const [img, setImg] = useState(null);
   // console.log(data);
@@ -23,9 +24,9 @@ const EditProduct = () => {
   };
 
   const onSubmit = async (data) => {
-    //  console.log(data);
+      console.log(data);
     const formdata = new FormData();
-    formdata.append("picture", img);
+    formdata.append("pic", img);
     formdata.append("fname", data?.fname);
     formdata.append("lname", data?.lname);
     formdata.append("category", data?.category);
@@ -115,7 +116,7 @@ const EditProduct = () => {
               <Form.Group controlId="formFile" className="mb-3 mt-5">
                 <Form.Control
                   type="file"
-                  name="picture"
+                  name="pic"
                   accept=".png, .jpg, .jpeg"
                   onChange={imgSet}
                 />
@@ -155,4 +156,4 @@ const EditProduct = () => {
   );
 };
 
-export default EditProduct;
+export default AddProduct;

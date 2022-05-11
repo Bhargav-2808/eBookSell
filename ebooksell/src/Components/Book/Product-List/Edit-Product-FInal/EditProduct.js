@@ -1,8 +1,18 @@
 import React, { useEffect, useState } from "react";
 import { Col, Container, Form, Row } from "react-bootstrap";
 import { useForm } from "react-hook-form";
-import { addBook, displayCategory } from "../../api";
-const AddProduct = () => {
+import { Navigate, useNavigate, useParams } from "react-router-dom";
+import "./editproduct.css";
+import {
+  addBook,
+  displayCategory,
+  editBook,
+  getBookById,
+} from "../../../../api";
+const EditProduct = () => {
+  const { id } = useParams();
+  const navigate = useNavigate();
+
   const [data, setData] = useState([]);
   const [img, setImg] = useState(null);
   // console.log(data);
@@ -14,6 +24,7 @@ const AddProduct = () => {
   // console.log(img);
   useEffect(() => {
     displayCategories();
+    loadBooksData();
   }, []);
 
   const displayCategories = async () => {
@@ -26,23 +37,35 @@ const AddProduct = () => {
     //  console.log(data);
     const formdata = new FormData();
     formdata.append("picture", img);
-    formdata.append("fname", data?.fname);
-    formdata.append("lname", data?.lname);
+    formdata.append("firstname", data?.firstname);
+    formdata.append("lastname", data?.lastname);
     formdata.append("category", data?.category);
     formdata.append("price", data?.price);
     formdata.append("description", data?.description);
     // formdata.append("fn",data?.fname) ;
-    // console.log(img);
-    const response = await addBook(formdata);
+    console.log(formdata);
+    const response = await editBook(formdata, id);
+    // if(response){
+
+    //   // navigate("/productlist");
+    // }
   };
 
-  const { register, handleSubmit } = useForm();
+  const { register, handleSubmit, reset } = useForm();
+  const loadBooksData = async () => {
+    const response = await getBookById(id);
+    //console.log(response);
+    // console.log(response)
+    reset(response.data);
+  };
+
+
   return (
     <>
       <Container className="mt-2">
         <Row className="mt-3">
           <Col className="d-flex justify-content-center">
-            <h2>Add Product</h2>
+            <h2>Edit Product</h2>
           </Col>
         </Row>
         <form
@@ -57,16 +80,16 @@ const AddProduct = () => {
                   <Form.Label>First Name *</Form.Label>
                   <Form.Control
                     type="text"
-                    name="fname"
-                    {...register("fname", { required: true })}
+                    name="firstname"
+                    {...register("firstname", { required: true })}
                   />
                 </Col>
                 <Col>
                   <Form.Label>Last Name *</Form.Label>
                   <Form.Control
                     type="text"
-                    name="lname"
-                    {...register("lname", { required: true })}
+                    name="lastname"
+                    {...register("lastname", { required: true })}
                   />
                 </Col>
               </Row>
@@ -155,4 +178,4 @@ const AddProduct = () => {
   );
 };
 
-export default AddProduct;
+export default EditProduct;
