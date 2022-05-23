@@ -3,12 +3,14 @@ import ReactDOM from "react-dom";
 import "./index.css";
 import App from "./App";
 import { BrowserRouter } from "react-router-dom";
+import { BookState } from "./Context/BookState";
 
 ReactDOM.render(
   <BrowserRouter>
-    <App />
+    <BookState>
+      <App />
+    </BookState>
   </BrowserRouter>,
-
   document.getElementById("root")
 );
 

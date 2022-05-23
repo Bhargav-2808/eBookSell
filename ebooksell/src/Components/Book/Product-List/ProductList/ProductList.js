@@ -17,13 +17,13 @@ const ProductList = () => {
   const [totalPages, setTotalPages] = useState(4);
 
   useEffect(() => {
-    displaybooklist();
+     displaybooklist();
   }, [page, perPage, search]);
 
-
-  console.log(data,search,count,page,perPage,totalPages);
+ console.log(search);
   const displaybooklist = async () => {
-    const response = await displayBook(page, perPage, search);
+    
+     const response = await displayBook(page, perPage, search);
     // console.log(response);
     setData(response?.data?.searchBook);
 
@@ -43,21 +43,14 @@ const ProductList = () => {
           </Col>
         </Row>
         <Row>
-
           <Col className="d-flex justify-content-end">
-            <input type="text" placeholder="Search.." className="_input" />
-            <button
-              className="_addCart"
-              type="submit"
-              onClick={(e) => setSearch(e.target.value)}
-            >
-              Search
-            </button>
+            <input type="text" placeholder="Search.." className="_input"  onChange={(e) => setSearch(e.target.value)}/>
+            
           </Col>
         </Row>
         <Row>
           <Col>
-          <h5>Total Books : {count}</h5>
+            <h5>Total Books : {count}</h5>
             <Table responsive="lg" className="mt-2">
               <thead>
                 <tr>
@@ -121,12 +114,6 @@ const ProductList = () => {
                     </td>
                   </tr>
                 ))}
-                {/* <tr>
-                  <td>1</td>
-                  <td>Table cell</td>
-                  <td>Table cell</td>
-                  <td>Table cell</td>
-                </tr> */}
               </tbody>
             </Table>
           </Col>
@@ -136,10 +123,12 @@ const ProductList = () => {
             <div className="d-flex me-5">
               <p className="me-3">Rows per page</p>
               <form>
-                <select  onChange={(e) => {
+                <select
+                  onChange={(e) => {
                     setPerPage(parseInt(e.target.value));
-                  }}>
-                  <option>2</option>
+                  }}
+                >
+                  <option>4</option>
                   <option>5</option>
                   <option>10</option>
                   <option>15</option>

@@ -1,34 +1,36 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useContext } from "react";
 import "./addcartproduct.css";
 import { Container, Row, Col, Pagination, Card } from "react-bootstrap";
 import dummy from "../../../Images/dummy-image.png";
-import { displayBook } from "../../../api";
+import { displayBook, getBookById } from "../../../api";
+import { Link } from "react-router-dom";
+import BookContext from "../../../Context/book.context";
 
 const AddCartProduct = () => {
   const [data, setData] = useState([]);
+  const [id, setId] = useState(null);
 
-  console.log(data);
   useEffect(() => {
     displayBooks();
   }, []);
 
   const displayBooks = async () => {
-    const response = await displayBook();
-    // console.log(response);
-    // console.log(response?.data);
-    setData(response?.data);
+    const response = await displayBook(1, 25, "");
+    setData(response?.data?.searchBook);
   };
+
+  const { addToCart } = useContext(BookContext);
 
   return (
     <>
       <Container className="mt-2 book-display-container">
-        <Row className="mt-2">
+        <Row className="mt-4">
           <Col className="d-flex justify-content-center">
             <h2>Display Product</h2>
             {/* <img src="C:/projects/E-book-sell/ebooksell/public/images/uploads/img-1651923373732.jpeg" /> */}
           </Col>
         </Row>
-        <Row className=" d-flex  ">
+        <Row className=" d-flex  mt-4">
           {/* {[...Array(6)].map((data, index) => (
             <Col key={"__"+index}>hii</Col>
           ))} */}
@@ -52,7 +54,7 @@ const AddCartProduct = () => {
           </Card> */}
 
           {data.map((dataset, index) => (
-            <Col className="mt-3" >
+            <Col className="mt-5 d-flex justify-content-center">
               <Card
                 style={{ width: "200px", postion: "relative" }}
                 className="card-style"
@@ -92,7 +94,7 @@ const AddCartProduct = () => {
                           {"      "}
                           &nbsp;20.00% OFF
                         </span>
-                        <p><b>₹{dataset?.price - (dataset?.price * 20) / 100}</b></p>
+                        <b> ₹{dataset?.price - (dataset?.price * 20) / 100}</b>
                       </p>
                     </Col>
                   </Row>
@@ -100,7 +102,14 @@ const AddCartProduct = () => {
                   <Row className="p-1 mb-2" style={{ padding: "1rem" }}>
                     <Col className="d-flex justify-content-center">
                       <hr />
-                      <button className="_addtocartbtn  ">Add to cart</button>
+                      <Link
+                        to={"/addcartproduct"}
+                        onClick={() => {
+                          addToCart(dataset);
+                        }}
+                      >
+                        <button className="_addtocartbtn  ">Add to cart</button>
+                      </Link>
                     </Col>
                   </Row>
                 </Card.Body>

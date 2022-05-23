@@ -52,11 +52,25 @@ const bookSchema = new mongoose.Schema({
     required: true,
   },
   base64image: {
-    type:String,
-    required:true
-    
-   
+    type: String,
+    required: true,
   },
+});
+
+const cartSchema = new mongoose.Schema({
+  _id: mongoose.Schema.Types.ObjectId,
+  book: {
+    type: String,
+    required: true,
+  },
+  totalprice: {
+    type: Number,
+    required: true,
+  },
+  OrderDate: {
+    type: Date,
+    required:true
+  }
 });
 
 const User = mongoose.model("user", userSchema);

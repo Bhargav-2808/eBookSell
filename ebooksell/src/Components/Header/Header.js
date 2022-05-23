@@ -1,11 +1,20 @@
-import React from "react";
+import React, { useContext, useEffect, useState } from "react";
 import logo from "../../Images/site-logo.svg";
+import Badge from "@material-ui/core/Badge";
 import cart from "../../Images/cart.svg";
-import { Nav, Container, Navbar } from "react-bootstrap";
+import { Nav, Container, Navbar, Row, Col } from "react-bootstrap";
 import "./header.css";
-import { Link } from "react-router-dom";
+import { Link, Navigate, useNavigate } from "react-router-dom";
+import BookContext from "../../Context/book.context";
 
 function Header() {
+  let len;
+  const navigate = useNavigate();
+  const {cartItems}= useContext(BookContext)
+  
+  const cartPage = () => {
+    navigate("/cart");
+  };
   return (
     <>
       <Navbar className="_navbar">
@@ -18,14 +27,18 @@ function Header() {
             <p className="_dash">|</p>
             <Link to="/register" className="_navlink">
               Register
-         
             </Link>
+
             <p className="_dash">|</p>
             <Link to="/displayuser" className="_navlink">
               User
             </Link>
           </Nav>
-          <img src={cart} className="ms-3" alt="logo" />
+          <div onClick={cartPage} style={{ cursor: "pointer" }}>
+            <Badge badgeContent={cartItems.length} color="primary">
+              <img src={cart} />
+            </Badge>
+          </div>  
         </Container>
       </Navbar>
     </>
