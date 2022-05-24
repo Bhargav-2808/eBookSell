@@ -59,8 +59,8 @@ const bookSchema = new mongoose.Schema({
 
 const cartSchema = new mongoose.Schema({
   _id: mongoose.Schema.Types.ObjectId,
-  book: {
-    type: String,
+  totalbooks: {
+    type: Number,
     required: true,
   },
   totalprice: {
@@ -68,12 +68,13 @@ const cartSchema = new mongoose.Schema({
     required: true,
   },
   OrderDate: {
-    type: Date,
-    required:true
-  }
+    type: String,
+    required: true,
+  },
 });
 
 const User = mongoose.model("user", userSchema);
 const Category = mongoose.model("category", categorySchema);
 const Book = mongoose.model("book", bookSchema);
-export { User, Category, Book };
+const Cart = mongoose.model("cart", cartSchema);
+export { User, Category, Book, Cart };

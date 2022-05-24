@@ -18,7 +18,8 @@ import {
   getBook,
   getBookById,
   editBook,
-  deleteBook
+  deleteBook,
+  addCart,
 } from "../Controller/controller.js";
 const route = express.Router();
 
@@ -33,10 +34,11 @@ route.get("/getbook/:id", getBookById);
 route.post("/registerUser", registerUser);
 route.post("/loginUser", loginUser);
 route.post("/addcategory", addCategory);
-route.post("/addbook",upload.single('pic'), addBook);
+route.post("/addbook", upload.single("pic"), addBook);
+route.post("/addcart", addCart);
 route.put("/:id", editUser);
 route.put("/editcategory/:id", editCategory);
-route.put("/editbook/:id",upload.single('picture'), editBook);
+route.put("/editbook/:id", upload.single("picture"), editBook);
 route.delete("/:id", deleteUser);
 route.delete("/deletecategory/:id", deleteCategory);
 route.delete("/deletebook/:id", deleteBook);

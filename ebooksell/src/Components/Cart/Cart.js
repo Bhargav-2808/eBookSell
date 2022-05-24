@@ -4,13 +4,31 @@ import { Container, Row, Col, Card } from "react-bootstrap";
 import dummy from "../../Images/dummy-image.png";
 import { useContext } from "react";
 import bookContext from "../../Context/book.context";
+import { addCart } from "../../api";
 
 function Cart() {
   const { cartItems, removeItem } = useContext(bookContext);
-  let price=0;
+  let price = 0;
+  cartItems.map((item) => {
+    price += parseInt(item?.price - (item?.price * 20) / 100);
+  });
 
-  
+  const today = new Date();
+  const book = {
+    books: cartItems.length,
+    OrderDate:
+      today.getDate() +
+      "-" +
+      (today.getMonth() + 1) +
+      "-" +
+      today.getFullYear(),
+    totalprice: price,
+  };
 
+  const addCartDetails = async () => {
+    const response = await addCart(book);
+    console.log(response);
+  };
 
   const cart = (
     <>
@@ -73,26 +91,26 @@ function Cart() {
             <h6>My shopping Bag({cartItems.length} items)</h6>
           </Col>
           <Col className="d-flex justify-content-center">
-            {cartItems.map((item) => {
-              price+= (parseInt(item?.price - (item?.price * 20) / 100))
-            })}
-           Total Price : {price} ₹
+            Total Price : {price} ₹
           </Col>
         </Row>
         <Row className="mt-2  ">{cart}</Row>
         <Row className="mt-2  ">
           <Col className="d-flex justify-content-center mt-2">
-            <button
-              style={{
-                backgroundColor: "#f14d54",
-                color: "white ",
-                height: "40px",
-                padding: "0 15px",
-                marginLeft: "5px",
-              }}
-            >
-              Place order
-            </button>
+            {cartItems.length > 0 && (
+              <button
+                style={{
+                  backgroundColor: "#f14d54",
+                  color: "white ",
+                  height: "40px",
+                  padding: "0 15px",
+                  marginLeft: "5px",
+                }}
+                onClick={addCartDetails}
+              >
+                Place order
+              </button>
+            )}
           </Col>
         </Row>
       </Container>

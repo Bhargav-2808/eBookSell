@@ -65,7 +65,6 @@ const getBookById = async (id) => {
   return axios.get(`${URL}/getbook/${id}`);
 };
 
-
 const editBook = async (book, id) => {
   return axios.put(`${URL}/editbook/${id}`, book);
 };
@@ -73,6 +72,10 @@ const editBook = async (book, id) => {
 const deleteBook = async (id) => {
   return await axios.delete(`${URL}/deletebook/${id}`);
 };
+
+const addCart = async (book)=>{
+  return axios.post(`${URL}/addcart`,book)
+}
 export {
   registerUser,
   loginUser,
@@ -91,5 +94,6 @@ export {
   displayBook,
   getBookById,
   editBook,
-  deleteBook
+  deleteBook,
+  addCart
 };

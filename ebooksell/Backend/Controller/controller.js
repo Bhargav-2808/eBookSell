@@ -1,4 +1,4 @@
-import { User, Category, Book } from "./../Model/user.js";
+import { User, Category, Book, Cart } from "./../Model/user.js";
 import mongoose from "mongoose";
 import bcrypt from "bcrypt";
 import multer from "multer";
@@ -87,7 +87,7 @@ const loginUser = async (req, res) => {
     if (luser) {
       const decrypted = bcrypt.compareSync(password, luser.password);
       if (decrypted) {
-        res.status(200).json({ Success: "Login Successfull." });
+        res.status(200).json({ Success: "Login Successfull.", user: luser });
       } else {
         res.status(400).json({ Error: "Login Using Correct Credentials." });
       }
@@ -355,11 +355,11 @@ const getBook = async (req, res) => {
     const searchQuery = req.query.search;
     const count = await Book.countDocuments({});
     const totalPages = Math.ceil(count / parseInt(perPage));
-    console.log(page,perPage,searchQuery,count,totalPages);
+    console.log(page, perPage, searchQuery, count, totalPages);
 
     let searchBook;
     if (searchQuery === "") {
-      searchBook =await Book.find({})
+      searchBook = await Book.find({})
         .sort({
           price: 1,
           description: 1,
@@ -368,10 +368,9 @@ const getBook = async (req, res) => {
         .skip((page - 1) * parseInt(perPage))
         .limit(parseInt(perPage));
 
-
-        // console.log(searchBook);
+      // console.log(searchBook);
     } else {
-      searchBook =await Book.find({
+      searchBook = await Book.find({
         $or: [
           { description: { $regex: searchQuery, $options: "i" } },
           { price: { $regex: searchQuery, $options: "i" } },
@@ -386,15 +385,11 @@ const getBook = async (req, res) => {
         .skip((page - 1) * parseInt(perPage))
         .limit(parseInt(perPage));
 
-        // console.log(searchBook);
-
+      // console.log(searchBook);
     }
 
-    
     try {
-      res.status(200).json(
-        {searchBook, count, totalPages}
-        );
+      res.status(200).json({ searchBook, count, totalPages });
     } catch (error) {
       res.status(409).json({ message: error.message });
     }
@@ -464,6 +459,26 @@ const deleteBook = async (request, response) => {
   }
 };
 
+const addCart = async (req, res) => {
+  const { books, totalprice, OrderDate } = req.body;
+  try {
+    const cart = await new Cart({
+      _id: new mongoose.Types.ObjectId(),
+      totalbooks: books,
+      OrderDate: OrderDate,
+      totalprice: totalprice,
+    });
+    const newCart = await cart.save();
+    res.status(200).json({
+      newCart,
+    });
+  } catch (error) {
+    res.status(400).json({
+      error,
+    });
+  }
+};
+
 export {
   registerUser,
   loginUser,
@@ -483,4 +498,5 @@ export {
   getBookById,
   editBook,
   deleteBook,
+  addCart,
 };
