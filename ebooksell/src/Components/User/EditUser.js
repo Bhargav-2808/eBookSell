@@ -6,6 +6,7 @@ import { displayUser, displayUserById, editUser } from "../../api";
 import ToastMesage from "../../ToastMesage";
 import { messages } from "../../Shared/Shared";
 import { toast } from "react-toastify";
+import { RoutePaths } from "../../RoutePaths";
 
 
 const EditUser = () => {
@@ -26,14 +27,14 @@ const EditUser = () => {
     let response = await editUser(data, id)
       .then(() => {
         toast.success(messages?.UPDATED_SUCCESS);
-        navigate("/displayuser");
+        navigate(RoutePaths.DisplayUser);
       })
       .catch(() => {
         toast.error(messages?.ERROR);
       });
 
     if (response) {
-      navigate("/displayuser");
+      navigate(RoutePaths.DisplayUser);
     }
   };
   const loadUsersData = async () => {

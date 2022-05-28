@@ -19,8 +19,11 @@ function Login() {
 
   const onSubmit = async (data) => {
     let response = await loginUser(data)
-      .then(() => {
+      .then((result) => {
         toast.success(messages?.LOGIN_SUCCESS);
+        if(result){
+          sessionStorage.setItem("user",JSON.stringify(result?.data));
+        }
       })
       .catch(() => {
         toast.error(messages?.ERROR);

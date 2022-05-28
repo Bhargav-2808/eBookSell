@@ -9,6 +9,7 @@ import { toast } from "react-toastify";
 import { messages } from "../../Shared/Shared";
 import ToastMesage from "../../ToastMesage";
 import { useNavigate } from "react-router-dom";
+import { RoutePaths } from "../../RoutePaths";
 
 function Cart() {
   const { cartItems, removeItem } = useContext(bookContext);
@@ -35,7 +36,7 @@ function Cart() {
       .then((result) => {
         toast.success(messages.ORDER_SUCCESS);
         if (result) {
-          navigate("/addcartproduct");
+          navigate(RoutePaths.AddCartProduct);
         }
       })
       .catch((err) => {

@@ -1,0 +1,15 @@
+export const RoutePaths = {
+  Home: "/",
+  Login: "/login",
+  Register: "/register",
+  AddCartProduct: "/addcartproduct",
+  DisplayUser: "/displayuser",
+  EditUser: "/edituser/:id",
+  DisplayCategory: "/displaycategory",
+  EditCategory: "/editcategory/:id",
+  AddCategory: "/addcategory",
+  AddProduct: "/addcategory",
+  ProductList: "/productlist",
+  EditProduct: "/editproduct",
+  Cart: "/cart",
+};

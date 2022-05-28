@@ -4,6 +4,7 @@ import { useForm } from "react-hook-form";
 import { Navigate, useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 import { addBook, displayCategory } from "../../../../api";
+import { RoutePaths } from "../../../../RoutePaths";
 import { messages } from "../../../../Shared/Shared";
 import ToastMesage from "../../../../ToastMesage";
 import "./addproduct.css";
@@ -41,7 +42,7 @@ const AddProduct = () => {
     const response = await addBook(formdata)
       .then(() => {
         toast.success(messages?.CATEGORY_ADDED);
-        navigate("/productlist")
+        navigate(RoutePaths.ProductList)
       })
       .catch(() => {
         toast.error(messages?.ERROR);

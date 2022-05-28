@@ -11,40 +11,72 @@ import Header from "./Components/Header/Header";
 import Login from "./Components/Login/Login";
 import AddCartProduct from "./Components/Book/Book/AddCartProduct";
 import Register from "./Components/Register/Register";
-import Search from "./Components/Search/Search";
 import DisplayUser from "./Components/User/DisplayUser";
 import EditUser from "./Components/User/EditUser";
 import ProductList from "./Components/Book/Product-List/ProductList/ProductList";
-import { BookState } from "./Context/BookState";
+import Protected from "./Protected";
+import { RoutePaths } from "./RoutePaths";
 
 function App() {
   return (
     <>
-    
-        <Header />
-
-        {/* <Login/> */}
-        {/* <Register/> */}
-        {/* <ProductPage/> */}
-        {/* <EditProduct/> */}
-        {/* <ProductList /> */}
-        {/* <Cart/> */}
-        <Routes>
-          <Route exact path="/login" element={<Login />} />
-          <Route exact path="/register" element={<Register />} />
-          <Route exact path="/editbook/:id" element={<EditProduct />} />
-          <Route exact path="/addcartproduct" element={<AddCartProduct />} />
-          <Route exact path="/displayuser" element={<DisplayUser />} />
-          <Route exact path="/displaycategory" element={<DisplayCategory />} />
-          <Route exact path="/edituser/:id" element={<EditUser />} />
-          <Route exact path="/productlist" element={<ProductList />} />
-          <Route exact path="/addproduct" element={<AddProduct />} />
-          <Route exact path="/addcategory" element={<AddCategory />} />
-          <Route exact path="/editcategory/:id" element={<EditCategory />} />
-          <Route exact path="/cart" element={<Cart />} />
-        </Routes>
-        <Footer />
-     
+      <Header />
+      <Routes>
+        <Route path={RoutePaths.Home} element={<Login />} />
+        <Route exact path={RoutePaths.Register} element={<Register />} />
+        <Route
+          exact
+          path={RoutePaths.AddCartProduct}
+          element={<AddCartProduct />}
+        />
+        <Route
+          exact
+          path={RoutePaths.DisplayUser}
+          element={<Protected Component={DisplayUser} />}
+        />
+        <Route
+          exact
+          path={RoutePaths.EditUser}
+          element={<Protected Component={EditUser} />}
+        />
+        <Route
+          exact
+          path={RoutePaths.DisplayCategory}
+          element={<Protected Component={DisplayCategory} />}
+        />
+        <Route
+          exact
+          path={RoutePaths.AddCategory}
+          element={<Protected Component={AddCategory} />}
+        />
+        <Route
+          exact
+          path={RoutePaths.EditCategory}
+          element={<Protected Component={EditCategory} />}
+        />
+        <Route
+          exact
+          path={RoutePaths.AddProduct}
+          element={<Protected Component={AddProduct} />}
+        />
+        <Route
+          exact
+          path={RoutePaths.ProductList}
+          element={<Protected Component={ProductList} />}
+        />
+        <Route
+          exact
+          path={RoutePaths.EditProduct}
+          element={<Protected Component={EditProduct} />}
+        />
+        <Route
+          exact
+          path={RoutePaths.Cart}
+          element={<Protected Component={Cart} />}
+        />
+        <Route path="*" element={<h1>Page not Found</h1>} />
+      </Routes>
+      <Footer />
     </>
   );
 }

@@ -4,6 +4,7 @@ import { useForm } from "react-hook-form";
 import { useNavigate } from "react-router-dom";
 import { toast ,ToastContainer} from "react-toastify";
 import { addCategory } from "../../api";
+import { RoutePaths } from "../../RoutePaths";
 import { messages } from "../../Shared/Shared";
 import "./addcategory.css";
 
@@ -19,7 +20,7 @@ const BookCategory = () => {
     let response = await addCategory(data)
       .then(() => {
         toast.success(messages?.CATEGORY_ADDED);
-        navigate("/displaycategory");
+        navigate(RoutePaths.DisplayCategory);
       })
       .catch(() => {
         toast.error(messages?.ERROR);

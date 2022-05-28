@@ -8,6 +8,7 @@ import { Link, useNavigate } from "react-router-dom";
 import { registerUser } from "../../api";
 import "./register.css";
 import ToastMesage from "../../ToastMesage";
+import { RoutePaths } from "../../RoutePaths";
 function Register() {
   const {
     register,
@@ -21,7 +22,7 @@ function Register() {
     let response = await registerUser(data)
     .then(() => {
       toast.success(messages?.USER_ADDED);
-      navigate("/login");
+      navigate(RoutePaths.Home);
     })
     .catch(() => {
       toast.error(messages?.ERROR);
