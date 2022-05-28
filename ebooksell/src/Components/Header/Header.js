@@ -1,5 +1,6 @@
 import React, { useContext, useEffect, useState } from "react";
 import logo from "../../Images/site-logo.svg";
+import lord from "../../Images/uploads/lord.jpg"
 import Badge from "@material-ui/core/Badge";
 import cart from "../../Images/cart.svg";
 import { Nav, Container, Navbar, Row, Col } from "react-bootstrap";
@@ -36,7 +37,7 @@ function Header() {
           </Nav>
           <div onClick={cartPage} style={{ cursor: "pointer" }}>
             <Badge badgeContent={cartItems.length} color="primary">
-              <img src={cart} />
+              <img src={cart} /> 
             </Badge>
           </div>  
         </Container>

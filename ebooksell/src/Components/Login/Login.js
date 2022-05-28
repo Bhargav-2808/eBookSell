@@ -1,8 +1,11 @@
 import React from "react";
 import { Col, Container, Row, Form } from "react-bootstrap";
 import { useForm } from "react-hook-form";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
+import { toast, ToastContainer } from "react-toastify";
 import { loginUser } from "../../api";
+import { messages } from "../../Shared/Shared";
+import ToastMesage from "../../ToastMesage";
 import "./login.css";
 
 function Login() {
@@ -12,13 +15,16 @@ function Login() {
 
     formState: { errors },
   } = useForm();
+  const navigate = useNavigate();
 
   const onSubmit = async (data) => {
-    console.log(data);
-      let response = await loginUser(data);
-      if (response) {
-        // navigate("/login");
-      }
+    let response = await loginUser(data)
+      .then(() => {
+        toast.success(messages?.LOGIN_SUCCESS);
+      })
+      .catch(() => {
+        toast.error(messages?.ERROR);
+      });
   };
   return (
     <>
@@ -40,12 +46,11 @@ function Login() {
                   <li>Vuew and track orger moore</li>
                 </ul>
                 <Col className="d-flex justify-content-start mt-5">
-                <button className="_loginbutton" type="submit">
-                 <Link to="register"> Create New Account</Link>
-                </button>
+                  <button className="_loginbutton" type="submit">
+                    <Link to="register"> Create New Account</Link>
+                  </button>
+                </Col>
               </Col>
-              </Col>
-           
             </Row>
           </Col>
           <Col>
@@ -81,8 +86,8 @@ function Login() {
               </Col>
             </Row>
           </Col>
-
         </Row>
+        <ToastMesage/>
       </Container>
     </>
   );

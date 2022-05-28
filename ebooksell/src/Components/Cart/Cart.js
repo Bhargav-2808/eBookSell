@@ -5,9 +5,14 @@ import dummy from "../../Images/dummy-image.png";
 import { useContext } from "react";
 import bookContext from "../../Context/book.context";
 import { addCart } from "../../api";
+import { toast } from "react-toastify";
+import { messages } from "../../Shared/Shared";
+import ToastMesage from "../../ToastMesage";
+import { useNavigate } from "react-router-dom";
 
 function Cart() {
   const { cartItems, removeItem } = useContext(bookContext);
+  const navigate = useNavigate();
   let price = 0;
   cartItems.map((item) => {
     price += parseInt(item?.price - (item?.price * 20) / 100);
@@ -26,8 +31,16 @@ function Cart() {
   };
 
   const addCartDetails = async () => {
-    const response = await addCart(book);
-    console.log(response);
+    const response = await addCart(book)
+      .then((result) => {
+        toast.success(messages.ORDER_SUCCESS);
+        if (result) {
+          navigate("/addcartproduct");
+        }
+      })
+      .catch((err) => {
+        toast.error(messages.ERROR);
+      });
   };
 
   const cart = (
@@ -114,6 +127,7 @@ function Cart() {
           </Col>
         </Row>
       </Container>
+      <ToastMesage />
     </>
   );
 }

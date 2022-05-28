@@ -2,7 +2,10 @@ import React, { useEffect } from "react";
 import { Col, Container, Form, Row } from "react-bootstrap";
 import { useForm } from "react-hook-form";
 import { useParams } from "react-router-dom";
+import { toast } from "react-toastify";
 import { displayCategoryById, editCategory } from "../../../api";
+import { messages } from "../../../Shared/Shared";
+import ToastMesage from "../../../ToastMesage";
 
 const EditCategory = () => {
   const {id} = useParams();
@@ -17,7 +20,13 @@ const EditCategory = () => {
     loadcategoriesData();
   }, []);
   const onSubmit = async (data) => {
-    const response = await editCategory(data, id);
+    const response = await editCategory(data, id) 
+    .then(() => {
+      toast.success(messages?.UPDATED_SUCCESS);
+    })
+    .catch(() => {
+      toast.error(messages?.ERROR);
+    });;
   };
   const loadcategoriesData = async () => {
     const response = await displayCategoryById(id);
@@ -58,6 +67,7 @@ const EditCategory = () => {
           </Form>
         </Row>
       </Container>
+      <ToastMesage/>
     </>
   );
 };

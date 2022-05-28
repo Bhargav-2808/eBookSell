@@ -10,6 +10,7 @@ import { confirmAlert } from "react-confirm-alert";
 import { IconButton } from "@mui/material";
 import Search from "../Search/Search";
 import { Global } from "../Search/Search";
+import ToastMesage from "../../ToastMesage";
 
 const DisplayUser = () => {
   const [data, setData] = useState();
@@ -34,7 +35,7 @@ const DisplayUser = () => {
   const displayUserData = async () => {
     // const response = await displayUser();
     // setData(response?.data);
-    const response = await paginateUser(page, perPage, search);
+    const response = await paginateUser(page, perPage, search)
     //console.log(response?.data);
     setData(response?.data?.searchData);
     setpageCount(response?.data?.count);

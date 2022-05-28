@@ -3,10 +3,14 @@ import { Col, Container, Form, Row } from "react-bootstrap";
 import { useForm } from "react-hook-form";
 import { useNavigate, useParams } from "react-router-dom";
 import { displayUser, displayUserById, editUser } from "../../api";
+import ToastMesage from "../../ToastMesage";
+import { messages } from "../../Shared/Shared";
+import { toast } from "react-toastify";
+
 
 const EditUser = () => {
   const navigate = useNavigate();
-  const {id} = useParams();    
+  const { id } = useParams();
   const {
     register,
     handleSubmit,
@@ -14,25 +18,29 @@ const EditUser = () => {
     formState: { errors },
   } = useForm();
 
-
-  useEffect( ()=>{
-    loadUsersData();    
-  },[]);
+  useEffect(() => {
+    loadUsersData();
+  }, []);
   const onSubmit = async (data) => {
-     //console.log(data);
-     let response = await editUser(data,id);
+    //console.log(data);
+    let response = await editUser(data, id)
+      .then(() => {
+        toast.success(messages?.UPDATED_SUCCESS);
+        navigate("/displayuser");
+      })
+      .catch(() => {
+        toast.error(messages?.ERROR);
+      });
+
     if (response) {
       navigate("/displayuser");
     }
-
   };
-  const loadUsersData = async() =>{
+  const loadUsersData = async () => {
     const response = await displayUserById(id);
     //console.log(response);
     reset(response.data);
-  }
-
-
+  };
 
   return (
     <>
@@ -87,7 +95,7 @@ const EditUser = () => {
 
                 <Col>
                   <Form.Label>Role *</Form.Label>
-                  
+
                   <Form.Select
                     name="role"
                     {...register("role", { required: true })}
@@ -100,7 +108,7 @@ const EditUser = () => {
               <Row className="mt-3">
                 <Col className="d-flex justify-content-start">
                   <button className="_loginbutton" type="submit">
-                    Register
+                    Edit
                   </button>
                 </Col>
               </Row>
@@ -108,6 +116,7 @@ const EditUser = () => {
           </Form>
         </Row>
       </Container>
+      <ToastMesage/>
     </>
   );
 };

@@ -1,11 +1,16 @@
 import React, { useEffect, useState } from "react";
 import { Col, Container, Form, Row } from "react-bootstrap";
 import { useForm } from "react-hook-form";
+import { Navigate, useNavigate } from "react-router-dom";
+import { toast } from "react-toastify";
 import { addBook, displayCategory } from "../../../../api";
-import './addproduct.css'
+import { messages } from "../../../../Shared/Shared";
+import ToastMesage from "../../../../ToastMesage";
+import "./addproduct.css";
 const AddProduct = () => {
   const [data, setData] = useState([]);
   const [img, setImg] = useState(null);
+  const navigate = useNavigate();
   // console.log(data);
 
   const imgSet = (event) => {
@@ -24,7 +29,6 @@ const AddProduct = () => {
   };
 
   const onSubmit = async (data) => {
-      console.log(data);
     const formdata = new FormData();
     formdata.append("pic", img);
     formdata.append("fname", data?.fname);
@@ -34,7 +38,14 @@ const AddProduct = () => {
     formdata.append("description", data?.description);
     // formdata.append("fn",data?.fname) ;
     // console.log(img);
-    const response = await addBook(formdata);
+    const response = await addBook(formdata)
+      .then(() => {
+        toast.success(messages?.CATEGORY_ADDED);
+        navigate("/productlist")
+      })
+      .catch(() => {
+        toast.error(messages?.ERROR);
+      });
   };
 
   const { register, handleSubmit } = useForm();
@@ -152,6 +163,7 @@ const AddProduct = () => {
           </Row>
         </form>
       </Container>
+      <ToastMesage/>
     </>
   );
 };

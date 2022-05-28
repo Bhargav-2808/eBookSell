@@ -16,9 +16,9 @@ const AddCartProduct = () => {
 
   const displayBooks = async () => {
     const response = await displayBook(1, 25, "");
-    setData(response?.data?.searchBook);
-  };
 
+    setData(response?.data?.searchBook);
+  };;
   const { addToCart } = useContext(BookContext);
 
   return (
@@ -64,7 +64,12 @@ const AddCartProduct = () => {
                 <Card.Body className=" book-card">
                   <img
                     variant="top"
-                    src={dummy}
+                    src={
+                      dummy
+                      // require(`../../../Images/uploads/${
+                      //   (dataset?.base64image).split("/images/")[1]
+                      // }`).default
+                    }
                     alt="book-image"
                     className="product-img"
                   />

@@ -1,9 +1,13 @@
 import React from "react";
 import { Col, Container, Row, Form } from "react-bootstrap";
+import "react-toastify/dist/ReactToastify.min.css";
+import { toast  ,ToastContainer} from "react-toastify";
+import { messages } from "../../Shared/Shared";
 import { useForm } from "react-hook-form";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { registerUser } from "../../api";
 import "./register.css";
+import ToastMesage from "../../ToastMesage";
 function Register() {
   const {
     register,
@@ -11,14 +15,20 @@ function Register() {
 
     formState: { errors },
   } = useForm();
+  const navigate = useNavigate();
 
   const onSubmit = async (data) => {
-    console.log(data);
-    let response = await registerUser(data);
-    if (response) {
-      // navigate("/login");
-    }
+    let response = await registerUser(data)
+    .then(() => {
+      toast.success(messages?.USER_ADDED);
+      navigate("/login");
+    })
+    .catch(() => {
+      toast.error(messages?.ERROR);
+    });
   };
+
+
   return (
     <>
       <Container className="mt-2">
@@ -79,14 +89,18 @@ function Register() {
               </Row>
               <Row className="mt-3">
                 <Col className="d-flex justify-content-start">
-                  <button className="_loginbutton" type="submit">
-                      Register
+                  <button
+                    className="_loginbutton"
+                    type="submit"
+                  >
+                    Register
                   </button>
                 </Col>
               </Row>
             </Form.Group>
           </Form>
         </Row>
+        <ToastMesage/>
       </Container>
     </>
   );
