@@ -1,0 +1,61 @@
+[{
+  "_id": {
+    "$oid": "628ccc5d06fdf820ae2088c0"
+  },
+  "firstname": "Bhargav",
+  "lastname": "Valani",
+  "role": "buyer",
+  "email": "bhargavvalani1@gmail.com",
+  "password": "$2b$10$2JZFs83v2lloqDrOZg.65u1U.DWUEaJ.lG0EXsKju1QTs4AwTgWfS",
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "628ccca506fdf820ae2088ca"
+  },
+  "firstname": "Bhargav",
+  "lastname": "Valani",
+  "role": "seller",
+  "email": "bhargavvalani01@gmail.com",
+  "password": "$2b$10$ebkhxBmM0FmLhMx2qo6fn.19o7/TDGE0k4GZPrWU/of2klvqexw4.",
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "628cd37606fdf820ae2088f4"
+  },
+  "firstname": "Bhargav",
+  "lastname": "Valani",
+  "role": "buyer",
+  "email": "bhargavvalani@gmail.com",
+  "password": "$2b$10$CxcTe9sSimK/uE9VZASgFu/9cmPAw/jB36Sv3mBk0Kx6/DpBsyapS",
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "628cd39606fdf820ae2088f8"
+  },
+  "firstname": "Bhargav",
+  "lastname": "Valani",
+  "role": "seller",
+  "email": "bhargavvalani12@gmail.com",
+  "password": "$2b$10$a0sZA1Wg638q1QJIVfW5DuGAAhb2xt16oaE9WAU9E7NB1He/rKLbW",
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "6291f73ddceecc5c3bce57e0"
+  },
+  "firstname": "Deep",
+  "lastname": "Patel",
+  "role": "buyer",
+  "email": "deep@gmail.com",
+  "password": "$2b$10$Xn8cheYH.dMEYe6TYfxhmOmXy5OVo9sFybzkENrexm4x1Vyx0WPbS",
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "62a823a6432790719a4dea3f"
+  },
+  "firstname": "Bhargav",
+  "lastname": "Valani",
+  "role": "buyer",
+  "email": "bhargavvalani02@gmail.com",
+  "password": "$2b$10$5vV76eU6YICrhaL3F81pNOdoodTRxtuDIjMhnlcjS73SupAQVbLVu",
+  "__v": 0
+}]

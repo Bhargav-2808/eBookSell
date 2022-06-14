@@ -1,0 +1,61 @@
+[{
+  "_id": {
+    "$oid": "6274b3856cef35f232cfb683"
+  },
+  "category": "Action-Adventure",
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "6274b3d08824c9fab98b55d6"
+  },
+  "category": "Comic Book or Graphic Novel",
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "6274b3dc8824c9fab98b55d9"
+  },
+  "category": "Detective and Mystery",
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "6274b3e88824c9fab98b55dc"
+  },
+  "category": "Fantasy",
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "6274b3f28824c9fab98b55df"
+  },
+  "category": "Historical Fiction",
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "6274b9610114b011269939bc"
+  },
+  "category": "Stock Market",
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "6274bd8324a7dda01a790e29"
+  },
+  "category": "Horror",
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "6274c37424a7dda01a790e2c"
+  },
+  "category": "religious",
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "628cd81e06fdf820ae20890d"
+  },
+  "category": "Unknown",
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "6291f88edceecc5c3bce57f2"
+  },
+  "category": "Comic",
+  "__v": 0
+}]

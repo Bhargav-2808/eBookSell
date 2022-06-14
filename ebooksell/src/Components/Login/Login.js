@@ -23,6 +23,7 @@ function Login() {
         toast.success(messages?.LOGIN_SUCCESS);
         if(result){
           sessionStorage.setItem("user",JSON.stringify(result?.data));
+          window.location.reload()
         }
       })
       .catch(() => {

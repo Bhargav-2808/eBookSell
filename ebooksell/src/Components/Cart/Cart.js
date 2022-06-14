@@ -37,6 +37,7 @@ function Cart() {
         toast.success(messages.ORDER_SUCCESS);
         if (result) {
           navigate(RoutePaths.AddCartProduct);
+          window.location.reload()
         }
       })
       .catch((err) => {

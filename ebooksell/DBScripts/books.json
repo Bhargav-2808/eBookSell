@@ -1,0 +1,276 @@
+[{
+  "_id": {
+    "$oid": "627642d4b40d2449d5904925"
+  },
+  "firstname": "Bhargav",
+  "lastname": "Valani",
+  "category": "Action Adventure",
+  "price": "599",
+  "description": "The forever court !! by Dave Rudden",
+  "base64image": "C:/projects/E-book-sell/ebooksell/Backend/images/img-1651917524346.jpeg",
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "6276430eb40d2449d5904927"
+  },
+  "firstname": "Bhargav",
+  "lastname": "Valani",
+  "category": "Comic Book or Graphic Novel",
+  "price": "999",
+  "description": "Coreline !! by Neil Gaiman",
+  "base64image": "C:/projects/E-book-sell/ebooksell/Backend/images/img-1651917582567.jpeg",
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "6276435bb40d2449d5904929"
+  },
+  "firstname": "Bhargav",
+  "lastname": "Valani",
+  "category": "Detective and Mystery",
+  "price": "499",
+  "description": "Dead of night !! by  Deborah Lucy ",
+  "base64image": "C:/projects/E-book-sell/ebooksell/Backend/images/img-1651917659537.jpeg",
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "62764390b40d2449d590492b"
+  },
+  "firstname": "Bhargav",
+  "lastname": "Valani",
+  "category": "Detective and Mystery",
+  "price": "888",
+  "description": "Dead Ringer  !! by  CT Mitchell ",
+  "base64image": "C:/projects/E-book-sell/ebooksell/Backend/images/img-1651917712634.jpeg",
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "627643d2b40d2449d590492d"
+  },
+  "firstname": "Bhargav",
+  "lastname": "Valani",
+  "category": "Detective and Mystery",
+  "price": "999",
+  "description": "The missing American  !! by Kwei Quartey",
+  "base64image": "C:/projects/E-book-sell/ebooksell/Backend/images/img-1651917778831.jpeg",
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "6276441cb40d2449d590492f"
+  },
+  "firstname": "Bhargav",
+  "lastname": "Valani",
+  "category": "Detective and Mystery",
+  "price": "999",
+  "description": "British Mystery  !! by J. S. Fletcher",
+  "base64image": "C:/projects/E-book-sell/ebooksell/Backend/images/img-1651917852409.jpeg",
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "62764467b40d2449d5904931"
+  },
+  "firstname": "Bhargav",
+  "lastname": "Valani",
+  "category": "Detective and Mystery",
+  "price": "700",
+  "description": "The name of wind !! by Patrick Rothfliss",
+  "base64image": "C:/projects/E-book-sell/ebooksell/Backend/images/img-1651917927076.jpeg",
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "62764490b40d2449d5904933"
+  },
+  "firstname": "Bhargav",
+  "lastname": "Valani",
+  "category": "Fantasy",
+  "price": "700",
+  "description": "The name of Wind  !! by Patrick Rothfliss.",
+  "base64image": "C:/projects/E-book-sell/ebooksell/Backend/images/img-1651917968928.jpeg",
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "627644deb40d2449d5904935"
+  },
+  "firstname": "Bhargav",
+  "lastname": "Valani",
+  "category": "Fantasy",
+  "price": "700",
+  "description": "Game of thrones !! by George R. R. Martin",
+  "base64image": "C:/projects/E-book-sell/ebooksell/Backend/images/img-1651918046800.jpeg",
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "6276455eb40d2449d5904937"
+  },
+  "firstname": "Bhargav",
+  "lastname": "Valani",
+  "category": "Fantasy",
+  "price": "655",
+  "description": "The Fifth Season !! by N. K. Jemisiin",
+  "base64image": "C:/projects/E-book-sell/ebooksell/Backend/images/img-1651918174882.jpeg",
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "627645bdb40d2449d5904939"
+  },
+  "firstname": "Bhargav",
+  "lastname": "Valani",
+  "category": "Historical Fiction",
+  "price": "655",
+  "description": "The war between us  !! by Sara Creviston Lee",
+  "base64image": "C:/projects/E-book-sell/ebooksell/Backend/images/img-1651918269059.jpeg",
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "627645e8b40d2449d590493b"
+  },
+  "firstname": "Bhargav",
+  "lastname": "Valani",
+  "category": "Historical Fiction",
+  "price": "655",
+  "description": "An orphan's War  !! by Molly Green",
+  "base64image": "C:/projects/E-book-sell/ebooksell/Backend/images/img-1651918312176.jpeg",
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "62764633b40d2449d590493d"
+  },
+  "firstname": "Bhargav",
+  "lastname": "Valani",
+  "category": "Historical Fiction",
+  "price": "355",
+  "description": "Gone with the wind  !! by Margaret Mitchell",
+  "base64image": "C:/projects/E-book-sell/ebooksell/Backend/images/img-1651918387030.jpeg",
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "62764677b40d2449d590493f"
+  },
+  "firstname": "Bhargav",
+  "lastname": "Valani",
+  "category": "Horrer",
+  "price": "355",
+  "description": "House of furies  !! by Madeleine Roux",
+  "base64image": "C:/projects/E-book-sell/ebooksell/Backend/images/img-1651918455776.jpeg",
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "627646b9b40d2449d5904942"
+  },
+  "firstname": "Dhruv",
+  "lastname": "Patel",
+  "category": "Horrer",
+  "price": "455",
+  "description": "The Shinnig !! by Stephen King",
+  "base64image": "C:/projects/E-book-sell/ebooksell/Backend/images/img-1651918521165.jpeg",
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "62764785b40d2449d5904945"
+  },
+  "firstname": "Deep",
+  "lastname": "Patel",
+  "category": "Horror",
+  "price": "145",
+  "description": "Ruskin Bond The Horror Omnibus",
+  "base64image": "C:/projects/E-book-sell/ebooksell/Backend/images/img-1651918725821.jpeg",
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "627647d0b40d2449d5904947"
+  },
+  "firstname": "Deep",
+  "lastname": "Patel",
+  "category": "Stock Market",
+  "price": "199",
+  "description": "The Intelligent Investor  !! by Benjamin Graham ",
+  "base64image": "C:/projects/E-book-sell/ebooksell/Backend/images/img-1651918800314.jpeg",
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "62764814b40d2449d5904949"
+  },
+  "firstname": "Deep",
+  "lastname": "Patel",
+  "category": "Stock Market",
+  "price": "199",
+  "description": "Stock Market Investing for beginners  !! by Benjamin Graham ",
+  "base64image": "C:/projects/E-book-sell/ebooksell/Backend/images/img-1651918868825.jpeg",
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "62764882b40d2449d590494b"
+  },
+  "firstname": "Deep",
+  "lastname": "Patel",
+  "category": "Stock Market",
+  "price": "499",
+  "description": "The Psychology of Money !! by Morgon Housel",
+  "base64image": "C:/projects/E-book-sell/ebooksell/Backend/images/img-1651918978466.jpeg",
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "627648a2b40d2449d590494d"
+  },
+  "firstname": "Deep",
+  "lastname": "Patel",
+  "category": "religious",
+  "price": "233",
+  "description": "Bhagavad Gita",
+  "base64image": "C:/projects/E-book-sell/ebooksell/Backend/images/img-1651919010029.jpeg",
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "627648c5b40d2449d590494f"
+  },
+  "firstname": "Deep",
+  "lastname": "Patel",
+  "category": "religious",
+  "price": "499",
+  "description": "Teaching of Lord Chaitanya",
+  "base64image": "C:/projects/E-book-sell/ebooksell/Backend/images/img-1651919045187.jpeg",
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "62764907b40d2449d5904951"
+  },
+  "firstname": "Deep",
+  "lastname": "Patel",
+  "category": "religious",
+  "price": "489",
+  "description": "The Laws of the Spirit !! by Khorshed Bhavanagri ",
+  "base64image": "C:/projects/E-book-sell/ebooksell/Backend/images/img-1651919111976.jpeg",
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "628ce57b06fdf820ae208968"
+  },
+  "firstname": "Bhargav",
+  "lastname": "Valani",
+  "category": "Detective and Mystery",
+  "price": "51221",
+  "description": "NA",
+  "base64image": "C:/projects/E-book-sell/ebooksell/backend/images/img-1653400955463.png",
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "628ce8ed34b80a9c179c55ab"
+  },
+  "firstname": "Dhruv",
+  "lastname": "Patel",
+  "category": "Action Adventure",
+  "price": "455",
+  "description": "dsd",
+  "base64image": "C:/projects/E-book-sell/ebooksell/backend/images/img-1653401837370.png",
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "6291f8d6dceecc5c3bce57f7"
+  },
+  "firstname": "Bhargav",
+  "lastname": "Valani",
+  "category": "Comic",
+  "price": "200",
+  "description": "Comic of bas karo hanry",
+  "base64image": "C:/projects/E-book-sell/ebooksell/backend/images/img-1653733590569.png",
+  "__v": 0
+}]

@@ -5,10 +5,12 @@ import dummy from "../../../Images/dummy-image.png";
 import { displayBook, getBookById } from "../../../api";
 import { Link } from "react-router-dom";
 import BookContext from "../../../Context/book.context";
+import { toast, ToastContainer } from "react-toastify";
 
 const AddCartProduct = () => {
   const [data, setData] = useState([]);
   const [id, setId] = useState(null);
+  const { addToCart } = useContext(BookContext);
 
   useEffect(() => {
     displayBooks();
@@ -19,7 +21,15 @@ const AddCartProduct = () => {
 
     setData(response?.data?.searchBook);
   };;
-  const { addToCart } = useContext(BookContext);
+
+  const addToCartProduct =(dataset)=>{
+      if(sessionStorage.getItem("user")){
+        addToCart(dataset);
+      }
+      else{
+        toast.error("Please Login before add to cart")
+      }
+  }
 
   return (
     <>
@@ -110,7 +120,7 @@ const AddCartProduct = () => {
                       <Link
                         to={"/addcartproduct"}
                         onClick={() => {
-                          addToCart(dataset);
+                          addToCartProduct(dataset);
                         }}
                       >
                         <button className="_addtocartbtn  ">Add to cart</button>
@@ -123,6 +133,17 @@ const AddCartProduct = () => {
           ))}
         </Row>
       </Container>
+      <ToastContainer
+          position="top-right"
+          autoClose={3000}
+          hideProgressBar={false}
+          newestOnTop={false}
+          closeOnClick
+          rtl={false}
+          pauseOnFocusLoss
+          draggable
+          pauseOnHover
+        />
     </>
   );
 };
